@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUGOODA FAMILY Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#6d28d9', // Vibrant Violet
+                        'secondary': '#059669', // Deep Emerald
+                        'dark-bg': '#1e293b', // Dark Slate Blue
+                        'light-text': '#f8fafc', // Light Off-White
+                        'medium-text': '#e2e8f0', // Medium Off-White
+                        'header-bg': '#312e81', // Darker Violet for header
+                        'footer-bg': '#1f2937', // Darker Slate for footer
+                        
+                        // New vibrant section background colors
+                        'home-bg': '#fef3c7', // Soft Yellow (Cream replacement)
+                        'photos-bg': '#bfdbfe', // Soft Blue (Light Blue replacement)
+                        'about-bg': '#d1fae5', // Soft Mint Green (Light Green replacement)
+                        'announcements-bg': '#ffe4e6', // Soft Pink/Rose
+                        'contacts-bg': '#fbcfe8', // Soft Pink (Light Lilac replacement)
+                        'calendar-bg': '#e0fcf4', // Lighter Soft Mint Green for Calendar (NEW)
+
+                        // Card background colors (lighter versions of section backgrounds)
+                        'card-home': '#fff7e6', 
+                        'card-photos': '#e0f2fe', 
+                        'card-about': '#e0fcf4', 
+                        'card-announcements': '#fff0f3', 
+                        'card-contacts': '#fee9f2', 
+                        'card-calendar': '#ffffff', // White for the calendar grid itself
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /* Hide all pages by default, showing only the active one via JS */
+        .page-section {
+            display: none;
+            min-height: calc(100vh - 6rem); /* Full height minus header */
+            padding-top: 5rem; /* Space for fixed header */
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+            border-radius: 1rem; /* Added for softer look */
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Added shadow */
+        }
+
+        /* --- Custom Background Colors for Each Section --- */
+        #home {
+            background-color: var(--home-bg);
+        }
+        #photos, #family-gallery-view {
+            background-color: var(--photos-bg);
+        }
+        /* Applied to main About Us page AND all its detail pages */
+        #about, #our-heritage-details, #community-support-details, #future-generations-details, #registered-youth-list, #content-submission, #content-archive {
+            background-color: var(--about-bg);
+        }
+        #announcements {
+            background-color: var(--announcements-bg); 
+        }
+        /* Applied to the new Calendar page */
+        #calendar {
+            background-color: var(--calendar-bg); 
+        }
+        #contacts {
+            background-color: var(--contacts-bg);
+        }
+        /* --- End Custom Background Colors --- */
+        
+        /* Custom scrollbar for better aesthetics */
+        body::-webkit-scrollbar {
+            width: 8px;
+        }
+        body::-webkit-scrollbar-thumb {
+            background-color: #6d28d9; /* Match new primary color */
+            border-radius: 20px;
+        }
+
+        /* Styling for the simulated gallery section (must be block to appear) */
+        #family-gallery-view.page-section {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+    </style>
+</head>
+<body class="font-sans bg-slate-200 text-slate-800 antialiased min-h-screen">
+
+    <header class="fixed top-0 left-0 w-full bg-header-bg shadow-lg z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20">
+            <a href="#home" class="text-2xl font-extrabold text-light-text tracking-tight">
+                MUGOODA<span class="text-secondary">FAMILY</span>
+            </a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link text-lg font-medium text-medium-text hover:text-light-text transition duration-150 p-2 rounded-lg" data-page="home">HOME</a>
+                <a href="#photos" class="nav-link text-lg font-medium text-medium-text hover:text-light-text transition duration-150 p-2 rounded-lg" data-page="photos">PHOTOS</a>
+                <a href="#about" class="nav-link text-lg font-medium text-medium-text hover:text-light-text transition duration-150 p-2 rounded-lg" data-page="about">ABOUT US</a>
+                <a href="#announcements" class="nav-link text-lg font-medium text-medium-text hover:text-light-text transition duration-150 p-2 rounded-lg" data-page="announcements">ANNOUNCEMENTS</a>
+                <a href="#calendar" class="nav-link text-lg font-medium text-medium-text hover:text-light-text transition duration-150 p-2 rounded-lg" data-page="calendar">CALENDAR</a>
+                <a href="#contacts" class="nav-link text-lg font-medium text-medium-text hover:text-light-text transition duration-150 p-2 rounded-lg" data-page="contacts">CONTACTS</a>
+            </nav>
+
+            <button id="mobile-menu-button" class="md:hidden text-light-text hover:text-primary p-2 rounded-lg transition duration-150">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-header-bg border-t border-primary/50 pb-2">
+            <nav class="flex flex-col px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="nav-link text-base font-medium text-medium-text hover:bg-primary/20 hover:text-light-text block px-3 py-2 rounded-md" data-page="home">HOME</a>
+                <a href="#photos" class="nav-link text-base font-medium text-medium-text hover:bg-primary/20 hover:text-light-text block px-3 py-2 rounded-md" data-page="photos">PHOTOS</a>
+                <a href="#about" class="nav-link text-base font-medium text-medium-text hover:bg-primary/20 hover:text-light-text block px-3 py-2 rounded-md" data-page="about">ABOUT US</a>
+                <a href="#announcements" class="nav-link text-base font-medium text-medium-text hover:bg-primary/20 hover:text-light-text block px-3 py-2 rounded-md" data-page="announcements">ANNOUNCEMENTS</a>
+                <a href="#calendar" class="nav-link text-base font-medium text-medium-text hover:bg-primary/20 hover:text-light-text block px-3 py-2 rounded-md" data-page="calendar">CALENDAR</a>
+                <a href="#contacts" class="nav-link text-base font-medium text-medium-text hover:bg-primary/20 hover:text-light-text block px-3 py-2 rounded-md" data-page="contacts">CONTACTS</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <section id="home" class="page-section text-center flex flex-col items-center justify-center pt-24 pb-12">
+            <div class="p-8 md:p-16">
+                <h1 class="text-6xl md:text-8xl font-black text-primary mb-4 leading-tight">
+                    THIS IS <span class="text-secondary">MUGOODA FAMILY</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-slate-700 max-w-3xl mx-auto mb-8">
+                    Discover our world of creativity, professional service, and visual excellence. We're glad you're here.
+                </p>
+                <a href="#about" onclick="showPage('about')" class="inline-block px-8 py-3 bg-primary text-white font-bold text-lg rounded-full shadow-lg hover:bg-primary/90 transition transform hover:scale-105 duration-300">
+                    Learn Our Story
+                </a>
+            </div>
+            
+            <div class="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
+                
+                <div class="bg-card-home p-6 sm:p-10 rounded-xl text-left border-l-8 border-primary shadow-inner hover:shadow-lg transition duration-300">
+                    <h2 class="text-3xl font-extrabold text-slate-800 mb-4 flex items-center">
+                        <span class="text-4xl text-primary mr-3">💡</span> Our Vision
+                    </h2>
+                    <p class="text-lg text-slate-700">
+                        To be a globally connected, enduring family legacy, recognized for our **unity, ethical leadership, and commitment** to mutual growth and well-being across generations.
+                    </p>
+                </div>
+
+                <div class="bg-card-home p-6 sm:p-10 rounded-xl text-left border-l-8 border-secondary shadow-inner hover:shadow-lg transition duration-300">
+                    <h2 class="text-3xl font-extrabold text-slate-800 mb-4 flex items-center">
+                        <span class="text-4xl text-secondary mr-3">🎯</span> Key Objectives
+                    </h2>
+                    <ul class="list-disc list-inside text-lg text-slate-700 space-y-2">
+                        <li>Maintain a functional, transparent digital archive for all family documents.</li>
+                        <li>Facilitate educational and professional mentorship for all young members.</li>
+                        <li>Organize an annual, mandatory family reunion to strengthen bonds.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="w-full max-w-5xl bg-card-home p-6 sm:p-10 rounded-xl mt-8 text-left border-t-4 border-primary shadow-inner">
+                <h2 class="text-3xl font-extrabold text-slate-800 mb-4">Our Mission</h2>
+                <p class="text-lg text-slate-700">
+                    To deliver cutting-edge solutions and beautiful design through dedication and client collaboration. Explore our site using the navigation links above to see our work and connect with our team.
+                </p>
+            </div>
+        </section>
+
+        <section id="photos" class="page-section pt-24 pb-12">
+            <div class="p-4 sm:p-8">
+                <h1 class="text-5xl font-extrabold text-slate-800 mb-10 text-center">Our Visual Portfolio</h1>
+                <p class="text-xl text-slate-700 max-w-3xl mx-auto mb-12 text-center">
+                    Click "View Gallery" to see the family's posted images or to upload a new one.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    
+                    <div class="bg-card-photos rounded-xl shadow-lg overflow-hidden transition transform hover:scale-[1.02] duration-300 flex flex-col justify-between border border-blue-300">
+                        <img src="https://assets-c4c042d3-1d67-4632-8418-4d6b67773295.s3.amazonaws.com/CEASER_FAMILY_A_diverse_family_of_four_engaged_in_mountain_climbing_at_sunrise._They_are_roped_together_ascending_a_snowy_rocky_peak_above_the_clouds_demonstrating_strength_and_resilience._8k_photorealistic._-_051b9e07-3531-4e78-be7f-85f81f9f238b.png" alt="A family of strength" class="w-full h-48 object-cover">
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="text-xl font-semibold text-slate-800">CEASER FAMILY</h3>
+                            <p class="text-sm text-slate-600 mt-1 mb-3 flex-grow">A family of strength.</p>
+                            <button onclick="handleViewGallery('CEASER FAMILY')" class="mt-auto px-3 py-2 bg-primary text-white font-medium rounded-lg shadow-md hover:bg-primary/90 transition text-sm">View Gallery</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-card-photos rounded-xl shadow-lg overflow-hidden transition transform hover:scale-[1.02] duration-300 flex flex-col justify-between border border-blue-300">
+                        <img src="https://assets-c4c042d3-1d67-4632-8418-4d6b67773295.s3.amazonaws.com/MUDANYE_FAMILY_A_joyful_Black_family_with_two_parents_and_three_children_laughing_and_playing_in_a_sunny_field_with_dandelions._The_father_has_one_child_on_his_shoulders_and_the_other_two_are_hugging_their_mother._Golden_hour_lighting._8k_photorealistic._-_f02dd9f0-2527-4a7b-a010-388f62363558.png" alt="Family of Joy" class="w-full h-48 object-cover">
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="text-xl font-semibold text-slate-800">MUDANYE FAMILY</h3>
+                            <p class="text-sm text-slate-600 mt-1 mb-3 flex-grow">Family of joy.</p>
+                            <button onclick="handleViewGallery('MUDANYE FAMILY')" class="mt-auto px-3 py-2 bg-primary text-white font-medium rounded-lg shadow-md hover:bg-primary/90 transition text-sm">View Gallery</button>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-card-photos rounded-xl shadow-lg overflow-hidden transition transform hover:scale-[1.02] duration-300 flex flex-col justify-between border border-blue-300">
+                        <img src="https://assets-c4c042d3-1d67-4632-8418-4d6b67773295.s3.amazonaws.com/MUSIMAMI_FAMILY_A_diverse_family_of_three_parents_and_one_child_meditating_together_in_a_serene_Japanese_garden_setting._The_atmosphere_is_peaceful_and_calm_with_a_small_waterfall_in_the_background._Soft_morning_light._8k_photorealistic._-_052f750b-8d05-4c6e-81f1-b92451f2d34a.png" alt="Family of Peace" class="w-full h-48 object-cover">
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="text-xl font-semibold text-slate-800">MUSIMAMI FAMILY</h3>
+                            <p class="text-sm text-slate-600 mt-1 mb-3 flex-grow">A family of peace.</p>
+                            <button onclick="handleViewGallery('MUSIMAMI FAMILY')" class="mt-auto px-3 py-2 bg-primary text-white font-medium rounded-lg shadow-md hover:bg-primary/90 transition text-sm">View Gallery</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-card-photos rounded-xl shadow-lg overflow-hidden transition transform hover:scale-[1.02] duration-300 flex flex-col justify-between border border-blue-300">
+                        <img src="https://assets-c4c042d3-1d67-4632-8418-4d6b67773295.s3.amazonaws.com/SEMPANGI_FAMILY_A_multi-generational_Indian_family_sitting_around_a_kitchen_table_laughing_heartily._Sunlight_streams_through_a_window_creating_a_warm_and_inviting_atmosphere._8k_photorealistic._-_2df22c6c-9a4c-473d-9d47-6699d7a22026.png" alt="Family of Laughter" class="w-full h-48 object-cover">
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="text-xl font-semibold text-slate-800">SEMPANGI FAMILY</h3>
+                            <p class="text-sm text-slate-600 mt-1 mb-3 flex-grow">A family of laughter .</p>
+                            <button onclick="handleViewGallery('SEMPANGI FAMILY')" class="mt-auto px-3 py-2 bg-primary text-white font-medium rounded-lg shadow-md hover:bg-primary/90 transition text-sm">View Gallery</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-card-photos rounded-xl shadow-lg overflow-hidden transition transform hover:scale-[1.02] duration-300 flex flex-col justify-between border border-blue-300">
+                        <img src="https://assets-c4c042d3-1d67-4632-8418-4d6b67773295.s3.amazonaws.com/BABIKOBA_FAMILY_A_loving_Black_couple_sitting_on_a_sofa_with_their_young_child_between_them._They_are_looking_at_each_other_with_affectionate_smiles_in_a_cozy_living_room_setting._Soft_lighting_creates_a_warm_ambiance._8k_photorealistic._-_f0250d18-77c8-47e1-8884-df919cf62ff8.png" alt="Family of Love" class="w-full h-48 object-cover">
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="text-xl font-semibold text-slate-800">BABIKOBA FAMILY</h3>
+                            <p class="text-sm text-slate-600 mt-1 mb-3 flex-grow">A family of love.</p>
+                            <button onclick="handleViewGallery('BABIKOBA FAMILY')" class="mt-auto px-3 py-2 bg-primary text-white font-medium rounded-lg shadow-md hover:bg-primary/90 transition text-sm">View Gallery</button>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-card-photos rounded-xl shadow-lg overflow-hidden transition transform hover:scale-[1.02] duration-300 flex flex-col justify-between border border-blue-300">
+                        <img src="https://assets-c4c042d3-1d67-4632-8418-4d6b67773295.s3.amazonaws.com/BRUNO_FAMILY_A_caring_Asian_mother_and_Caucasian_father_feeding_their_two_young_children_at_a_kitchen_table._The_scene_depicts_gentle_care_and_attention_in_a_bright_home_environment._8k_photorealistic._-_4f7df506-69e3-4c07-b649-1662580ef118.png" alt="Family of Care" class="w-full h-48 object-cover">
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="text-xl font-semibold text-slate-800">BRUNO FAMILY</h3>
+                            <p class="text-sm text-slate-600 mt-1 mb-3 flex-grow">A family of care.</p>
+                            <button onclick="handleViewGallery('BRUNO FAMILY')" class="mt-auto px-3 py-2 bg-primary text-white font-medium rounded-lg shadow-md hover:bg-primary/90 transition text-sm">View Gallery</button>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-card-photos rounded-xl shadow-lg overflow-hidden transition transform hover:scale-[1.02] duration-300 flex flex-col justify-between border border-blue-300">
+                        <img src="https://assets-c4c042d3-1d67-4632-8418-4d6b67773295.s3.amazonaws.com/DOROTHY_FAMILY_A_multi-generational_family_with_grandparents_parents_and_a_child_all_placing_their_hands_together_in_a_pile_on_a_wooden_table_as_a_symbol_of_unity._A_warm_fireplace_is_in_the_background._8k_photorealistic._-_23d130ed-37c2-40e1-a083-a719d45e5b30.png" alt="Family of Unity" class="w-full h-48 object-cover">
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="text-xl font-semibold text-slate-800">DOROTHY FAMILY</h3>
+                            <p class="text-sm text-slate-600 mt-1 mb-3 flex-grow">A family of unity.</p>
+                            <button onclick="handleViewGallery('DOROTHY FAMILY')" class="mt-auto px-3 py-2 bg-primary text-white font-medium rounded-lg shadow-md hover:bg-primary/90 transition text-sm">View Gallery</button>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-card-photos rounded-xl shadow-lg overflow-hidden transition transform hover:scale-[1.02] duration-300 col-span-1 flex flex-col justify-between border border-blue-300">
+                        <img src="https://assets-c4c042d3-1d67-4632-8418-4d6b67773295.s3.amazonaws.com/MONICA_FAMILY_A_large_diverse_group_of_people_of_various_ages_and_ethnicities_gathered_in_a_modern_communal_space._They_are_all_interacting_happily_and_inclusively._Daytime_with_natural_light._8k_photorealistic._-_057c0e64-e407-4286-93ed-7517c569f6e9.png" alt="A family of all" class="w-full h-48 object-cover">
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="text-xl font-semibold text-slate-800">MONICA FAMILY</h3>
+                            <p class="text-sm text-slate-600 mt-1 mb-3 flex-grow">A family of all.</p>
+                            <button onclick="handleViewGallery('MONICA FAMILY')" class="mt-auto px-3 py-2 bg-primary text-white font-medium rounded-lg shadow-md hover:bg-primary/90 transition text-sm">View Gallery</button>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-card-photos rounded-xl shadow-lg overflow-hidden transition transform hover:scale-[1.02] duration-300 col-span-1 flex flex-col justify-between border border-blue-300">
+                        <img src="https://assets-c4c042d3-1d67-4632-8418-4d6b67773295.s3.amazonaws.com/PROSSY_FAMILY_A_diverse_family_of_three_generations_praying_together_with_their_hands_clasped_in_a_peaceful_home_setting._Soft_light_highlights_their_expressions_of_reverence_and_hope._8k_photorealistic._-_0c31317d-2b73-41c3-8cc2-005691060447.png" alt="A family of faith" class="w-full h-48 object-cover">
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="text-xl font-semibold text-slate-800">PROSSY FAMILY</h3>
+                            <p class="text-sm text-slate-600 mt-1 mb-3 flex-grow">A family of faith.</p>
+                            <button onclick="handleViewGallery('PROSSY FAMILY')" class="mt-auto px-3 py-2 bg-primary text-white font-medium rounded-lg shadow-md hover:bg-primary/90 transition text-sm">View Gallery</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="family-gallery-view" class="page-section pt-24 pb-12">
+            <div class="p-8 md:p-16 w-full max-w-6xl mx-auto bg-card-photos rounded-xl shadow-lg border border-blue-300">
+                <button onclick="showPage('photos')" class="inline-flex items-center text-primary hover:text-primary/80 transition mb-6 font-medium">
+                    <svg class="w-4 h-4 mr-1 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    Back to All Families
+                </button>
+                <h1 id="gallery-header" class="text-5xl font-extrabold text-slate-800 mb-4">Gallery for [Family Name]</h1>
+                <p class="text-xl text-slate-700 mb-8">
+                    This is where the posted images would be dynamically displayed.
+                </p>
+
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 border-b-2 border-primary/30 pb-4">
+                    <p class="text-lg text-secondary font-semibold">Status: <span id="gallery-status">Viewing Initial Image.</span></p>
+                    <button onclick="openUploadModal(document.getElementById('gallery-header').textContent.replace('Gallery for ', ''))" class="mt-4 sm:mt-0 px-6 py-2 bg-secondary text-white font-bold rounded-lg shadow-lg hover:bg-secondary/90 transition duration-150">
+                        + Post a New Picture
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="family-images-container">
+                    <div class="bg-blue-100 rounded-lg shadow-inner overflow-hidden border border-blue-300">
+                        <img id="family-initial-image" src="" alt="Family Profile Picture" class="w-full h-64 object-cover">
+                        <div class="p-4">
+                            <p class="text-sm text-blue-800">Family Profile Image</p>
+                        </div>
+                    </div>
+
+                    <div class="col-span-1 md:col-span-2 p-6 bg-blue-50 rounded-lg flex items-center justify-center border-2 border-dashed border-blue-300 text-blue-700">
+                        <p class="text-xl">No other images have been posted yet. Click **Post a New Picture** above to add one!</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <section id="about" class="page-section pt-24 pb-12">
+            <div class="p-4 sm:p-8">
+                <h1 class="text-5xl font-extrabold text-slate-800 mb-8 text-center">Our Family Story & Legacy 🏡</h1>
+
+                <div class="max-w-4xl mx-auto mb-12 text-center bg-card-about p-6 rounded-xl shadow-md border border-green-300">
+                    <p class="text-xl text-slate-700 mb-6">
+                        The Mugooda name represents generations of **unity, faith, and hard work**. Our roots run deep, anchored by our patriarch and matriarch who instilled in us the values we cherish today. This website is a modern gathering place to share memories and celebrate our history.
+                    </p>
+                    <p class="text-lg text-slate-700 font-medium border-l-4 border-secondary pl-4 py-2">
+                        "Family is not an important thing. It's everything. Our commitment is to remain connected, no matter the distance."
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center mt-12">
+                    
+                    <a href="#our-heritage-details" onclick="showPage('our-heritage-details')" class="p-6 bg-card-about rounded-lg shadow-inner border border-green-300 cursor-pointer transition transform hover:scale-[1.03] duration-300 block">
+                        <span class="text-6xl text-primary mb-4 block">📜</span>
+                        <h3 class="text-2xl font-bold text-primary mb-2">Our Heritage</h3>
+                        <p class="text-sm text-slate-600 mt-2">Documenting our history since 1950, creating a shared archive of milestones and traditions for future generations. **(Click for Details)**</p>
+                    </a>
+                    
+                    <a href="#community-support-details" onclick="showPage('community-support-details')" class="p-6 bg-card-about rounded-lg shadow-inner border border-green-300 cursor-pointer transition transform hover:scale-[1.03] duration-300 block">
+                        <span class="text-6xl text-secondary mb-4 block">🤝</span>
+                        <h3 class="text-2xl font-bold text-secondary mb-2">Community & Support</h3>
+                        <p class="text-sm text-slate-600 mt-2">A commitment to mutual support, celebrating successes, and lifting each other up during challenges. We are stronger together. **(Click for Details)**</p>
+                    </a>
+                    
+                    <a href="#future-generations-details" onclick="showPage('future-generations-details')" class="p-6 bg-card-about rounded-lg shadow-inner border border-green-300 cursor-pointer transition transform hover:scale-[1.03] duration-300 block">
+                        <span class="text-6xl text-amber-600 mb-4 block">✨</span>
+                        <h3 class="text-2xl font-bold text-amber-600 mb-2">Future Generations</h3>
+                        <p class="text-sm text-slate-600 mt-2">A focus on mentoring, education, and providing resources to ensure the Mugooda legacy continues to thrive globally. **(Click for Details)**</p>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="our-heritage-details" class="page-section pt-24 pb-12">
+            <div class="p-8 md:p-16 w-full max-w-6xl mx-auto bg-card-about rounded-xl shadow-lg border border-green-300">
+                <button onclick="showPage('about')" class="inline-flex items-center text-primary hover:text-primary/80 transition mb-8 font-medium">
+                    <svg class="w-4 h-4 mr-1 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    Back to About Us
+                </button>
+                <h1 class="text-5xl font-extrabold text-primary mb-6">📜 Our Heritage: A Rich History</h1>
+                <p class="text-xl text-slate-700 mb-8">
+                    This is the dedicated space to add extensive information about your family's history, archives, key dates, and founding stories. You can include detailed narratives, old family photos (if not in the main photo gallery), and links to external resources.
+                </p>
+                <div class="space-y-6 text-lg text-slate-700">
+                    <p class="border-l-4 border-primary pl-4">**Founding Story:** The Mugooda lineage began with our great-grandparents, who settled in [Location] in [Year]. Their entrepreneurial spirit and dedication to [Value] set the foundation for all future generations.</p>
+                    <p class="border-l-4 border-primary pl-4">**Archived Documents:** We maintain digital records of all family milestones, including births, weddings, and key achievements. Access to the full archive is available upon request to verified family members.</p>
+                    <p class="border-l-4 border-primary pl-4">**Generational Traditions:** Every year, we gather for the annual [Event Name] to reconnect and pass down the tradition of [Specific Tradition].</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="community-support-details" class="page-section pt-24 pb-12">
+            <div class="p-8 md:p-16 w-full max-w-6xl mx-auto bg-card-about rounded-xl shadow-lg border border-green-300">
+                <button onclick="showPage('about')" class="inline-flex items-center text-primary hover:text-primary/80 transition mb-8 font-medium">
+                    <svg class="w-4 h-4 mr-1 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    Back to About Us
+                </button>
+                <h1 class="text-5xl font-extrabold text-secondary mb-6">🤝 Community & Support: Our Shared Commitment</h1>
+                <p class="text-xl text-slate-700 mb-8">
+                    Use this section to detail how the Mugooda family provides internal and external support. This is where you can document charity work, family funds, and mutual assistance programs.
+                </p>
+                <div class="space-y-6 text-lg text-slate-700">
+                    <p class="border-l-4 border-secondary pl-4">**The Mugooda Fund:** Established to provide emergency financial aid and educational grants to family members in need. Details on application and contribution are available here.</p>
+                    <p class="border-l-4 border-secondary pl-4">**Mentorship Network:** A resource connecting younger generations with experienced family members across various professional fields for career guidance and advice.</p>
+                    <p class="border-l-4 border-secondary pl-4">**Charity Initiatives:** Every [Month], the family participates in a collective effort to support a cause chosen by a rotating family committee, focusing on local community impact.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="future-generations-details" class="page-section pt-24 pb-12">
+            <div class="p-8 md:p-16 w-full max-w-6xl mx-auto bg-card-about rounded-xl shadow-lg border border-green-300">
+                <button onclick="showPage('about')" class="inline-flex items-center text-primary hover:text-primary/80 transition mb-8 font-medium">
+                    <svg class="w-4 h-4 mr-1 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    Back to About Us
+                </button>
+                <h1 class="text-5xl font-extrabold text-amber-600 mb-6">✨ Future Generations: Planning for Tomorrow</h1>
+                <p class="text-xl text-slate-700 mb-8">
+                    This area focuses on long-term planning, values reinforcement, and educational goals for the youngest members of the Mugooda family.
+                </p>
+                
+                <div class="space-y-6 text-lg text-slate-700 mb-12">
+                    <p class="border-l-4 border-amber-600 pl-4">**Educational Focus:** Highlighting key academic achievements and providing resources for standardized testing, university applications, and specialized training.</p>
+                    <p class="border-l-4 border-amber-600 pl-4">**Values Workshop:** Information on the quarterly workshops held for teenagers and young adults focusing on leadership, financial literacy, and maintaining family values.</p>
+                    <p class="border-l-4 border-amber-600 pl-4">**Digital Legacy Project:** Plans for the continued maintenance and expansion of the family's digital presence, including this portal and other archival projects.</p>
+                </div>
+
+                <h2 class="text-4xl font-extrabold text-amber-700 mb-6 border-b pb-4 border-amber-300">Future Generations Portal</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                    
+                    <a href="#registered-youth-list" onclick="showPage('registered-youth-list')" class="p-6 bg-amber-100 rounded-lg shadow-md border-l-8 border-amber-600 hover:bg-amber-200 transition duration-150 flex items-center space-x-4">
+                        <span class="text-4xl">👥</span>
+                        <div>
+                            <h3 class="text-xl font-bold text-amber-800">View Registered Youth</h3>
+                            <p class="text-sm text-slate-700">See the list of all young Mugoodas who have registered.</p>
+                        </div>
+                    </a>
+                    
+                    <a href="#content-submission" onclick="showPage('content-submission')" class="p-6 bg-amber-100 rounded-lg shadow-md border-l-8 border-amber-600 hover:bg-amber-200 transition duration-150 flex items-center space-x-4">
+                        <span class="text-4xl">✍️</span>
+                        <div>
+                            <h3 class="text-xl font-bold text-amber-800">Submit Your Content</h3>
+                            <p class="text-sm text-slate-700">Submit essays, ideas, or updates to the family.</p>
+                        </div>
+                    </a>
+
+                    <a href="#content-archive" onclick="showPage('content-archive')" class="p-6 bg-amber-100 rounded-lg shadow-md border-l-8 border-amber-600 hover:bg-amber-200 transition duration-150 flex items-center space-x-4">
+                        <span class="text-4xl">📚</span>
+                        <div>
+                            <h3 class="text-xl font-bold text-amber-800">Youth Content Archive</h3>
+                            <p class="text-sm text-slate-700">Read essays and updates submitted by young Mugoodas.</p>
+                        </div>
+                    </a>
+
+                </div>
+
+
+                <div class="p-8 bg-amber-50 rounded-lg border-2 border-dashed border-amber-400 shadow-xl">
+                    <h3 class="text-3xl font-extrabold text-amber-700 mb-4 flex items-center">
+                        <span class="text-4xl mr-2">🔑</span> Young Mugooda Registration
+                    </h3>
+                    <p class="text-lg text-slate-700 mb-6">
+                        **Daughters and Sons:** Register below to get verified access to our exclusive mentorship and content submission areas. Your future starts here!
+                    </p>
+
+                    <form id="young-mugooda-registration-form" onsubmit="event.preventDefault(); handleMugoodaRegistration();" class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                        <div class="col-span-1">
+                            <label for="first-name" class="block text-sm font-medium text-slate-700 mb-1">First Name</label>
+                            <input type="text" id="first-name" name="first-name" required class="w-full px-4 py-2 border border-amber-300 rounded-lg focus:ring-amber-500 focus:border-amber-500 transition" placeholder="Your Given Name">
+                        </div>
+                        <div class="col-span-1">
+                            <label for="family-name" class="block text-sm font-medium text-slate-700 mb-1">Family Name</label>
+                            <input type="text" id="family-name" name="family-name" required class="w-full px-4 py-2 border border-amber-300 rounded-lg focus:ring-amber-500 focus:border-amber-500 transition" placeholder="Your Family/Surname">
+                        </div>
+                        <div class="col-span-1">
+                            <button type="submit" class="w-full px-4 py-2 bg-amber-600 text-white font-bold rounded-lg shadow-md hover:bg-amber-700 transition duration-150">
+                                Register & Get Access
+                            </button>
+                        </div>
+                    </form>
+
+                    <p class="text-sm text-center text-secondary mt-6 border-t pt-4 border-amber-200">
+                        (Upon real deployment, this would trigger an email verification or manual approval process.)
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="registered-youth-list" class="page-section pt-24 pb-12">
+            <div class="p-8 md:p-16 w-full max-w-4xl mx-auto bg-card-about rounded-xl shadow-lg border border-green-300">
+                <button onclick="showPage('future-generations-details')" class="inline-flex items-center text-amber-600 hover:text-amber-700 transition mb-8 font-medium">
+                    <svg class="w-4 h-4 mr-1 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    Back to Future Generations
+                </button>
+                <h1 class="text-5xl font-extrabold text-amber-600 mb-6 flex items-center"><span class="text-4xl mr-2">👥</span> Registered Young Mugoodas</h1>
+                <p class="text-xl text-slate-700 mb-8">
+                    These are the future leaders who have registered their full names under the family's Future Generations initiative.
+                </p>
+                
+                <div id="registered-youth-container" class="space-y-4 p-6 bg-white rounded-lg shadow-inner border border-amber-200">
+                    <p class="text-lg text-slate-500 italic">No registrations submitted yet. Use the registration form on the previous page!</p>
+                </div>
+
+                <p class="text-sm text-center text-slate-500 mt-8">
+                    (Note: This is a simulated list and resets upon page refresh.)
+                </p>
+            </div>
+        </section>
+
+        <section id="content-submission" class="page-section pt-24 pb-12">
+            <div class="p-8 md:p-16 w-full max-w-4xl mx-auto bg-card-about rounded-xl shadow-lg border border-green-300">
+                <button onclick="showPage('future-generations-details')" class="inline-flex items-center text-amber-600 hover:text-amber-700 transition mb-8 font-medium">
+                    <svg class="w-4 h-4 mr-1 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    Back to Future Generations
+                </button>
+                <h1 class="text-5xl font-extrabold text-amber-600 mb-6 flex items-center"><span class="text-4xl mr-2">✍️</span> Young Mugooda Content Portal</h1>
+                <p class="text-xl text-slate-700 mb-8">
+                    Use this space to share your thoughts, academic essays, project ideas, or personal updates with the family elders for review and sharing.
+                </p>
+
+                <form onsubmit="event.preventDefault(); handleSubmitContent()" class="p-6 bg-amber-50 rounded-lg shadow-inner border border-amber-200">
+                    <div class="mb-4">
+                        <label for="submit-name" class="block text-sm font-medium text-slate-700 mb-1">Your Full Name (Must match registration)</label>
+                        <input type="text" id="submit-name" name="submit-name" required class="w-full px-4 py-2 border border-amber-300 rounded-lg focus:ring-amber-500 focus:border-amber-500 transition" placeholder="First Name and Family Name">
+                    </div>
+                    <div class="mb-4">
+                        <label for="content-title" class="block text-sm font-medium text-slate-700 mb-1">Content Title/Topic</label>
+                        <input type="text" id="content-title" name="content-title" required class="w-full px-4 py-2 border border-amber-300 rounded-lg focus:ring-amber-500 focus:border-amber-500 transition" placeholder="e.g., My Vision for the Mugooda Legacy">
+                    </div>
+                    <div class="mb-6">
+                        <label for="content-text" class="block text-sm font-medium text-slate-700 mb-1">Your Content (Essay, Idea, Update)</label>
+                        <textarea id="content-text" name="content-text" rows="8" required class="w-full px-4 py-2 border border-amber-300 rounded-lg focus:ring-amber-500 focus:border-amber-500 transition" placeholder="Type your full content here..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="w-full px-4 py-2 bg-secondary text-white font-bold rounded-lg shadow-md hover:bg-secondary/90 transition duration-150">
+                        Submit Content for Review
+                    </button>
+                </form>
+                
+                <div class="mt-12">
+                    <h2 class="text-3xl font-extrabold text-primary mb-4 border-b pb-2 border-amber-200">Recent Submissions (Pending Review)</h2>
+                    <div id="recent-submissions-container" class="space-y-4">
+                        <p class="text-lg text-slate-500 italic p-4 bg-white rounded-lg shadow-inner">Your submissions will appear here instantly upon submission.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="content-archive" class="page-section pt-24 pb-12">
+            <div class="p-8 md:p-16 w-full max-w-6xl mx-auto bg-card-about rounded-xl shadow-lg border border-green-300">
+                <button onclick="showPage('future-generations-details')" class="inline-flex items-center text-amber-600 hover:text-amber-700 transition mb-8 font-medium">
+                    <svg class="w-4 h-4 mr-1 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    Back to Future Generations
+                </button>
+                <h1 class="text-5xl font-extrabold text-amber-600 mb-6 flex items-center"><span class="text-4xl mr-2">📚</span> Youth Content Archive</h1>
+                <p class="text-xl text-slate-700 mb-8">
+                    A collection of published writings, ideas, and academic achievements contributed by the young members of the Mugooda family.
+                </p>
+                
+                <div id="content-archive-container" class="space-y-6">
+                    <p class="text-lg text-slate-500 italic p-6 bg-white rounded-lg shadow-inner border border-amber-200">No content has been published yet. Be the first to submit!</p>
+                </div>
+
+                <p class="text-sm text-center text-slate-500 mt-8">
+                    (In a real application, this content would undergo an editorial review process before appearing here.)
+                </p>
+            </div>
+        </section>
+        
+        <section id="announcements" class="page-section pt-24 pb-12">
+            <div class="p-4 sm:p-8">
+                <h1 class="text-5xl font-extrabold text-slate-800 mb-8 text-center flex items-center justify-center">
+                    <span class="text-4xl text-secondary mr-3">📢</span> Family Announcements Hub
+                </h1>
+                <p class="text-xl text-slate-700 max-w-3xl mx-auto mb-12 text-center">
+                    This is the central place for all official family news, important dates, life events, and organizational updates.
+                </p>
+
+                <div class="max-w-5xl mx-auto space-y-8" id="announcements-container">
+                    
+                    <div class="bg-red-50 p-6 rounded-xl shadow-lg border-l-8 border-red-600">
+                        <h3 class="text-3xl font-extrabold text-red-800 mb-2">Urgent: Annual Reunion Date Change</h3>
+                        <p class="text-sm font-medium text-slate-500 mb-4">Posted: October 28, 2025 | Category: **Organizational**</p>
+                        <p class="text-lg text-slate-700">
+                            Due to unforeseen scheduling conflicts, the **2026 Mugooda Family Reunion** has been moved to **August 15-17, 2026** (originally the first weekend in July). Please update your calendars and confirm your attendance with the coordination committee immediately. The location remains **[Location]**.
+                        </p>
+                    </div>
+
+                    <div class="bg-yellow-50 p-6 rounded-xl shadow-lg border-l-8 border-yellow-600">
+                        <h3 class="text-3xl font-extrabold text-yellow-800 mb-2">Congratulations to Timothy Mugooda!</h3>
+                        <p class="text-sm font-medium text-slate-500 mb-4">Posted: October 20, 2025 | Category: **Achievement**</p>
+                        <p class="text-lg text-slate-700">
+                            We are proud to celebrate **Timothy Mugooda** on receiving his **Master of Science degree in Artificial Intelligence** from Stanford University. Timothy is a shining example for our future generations. We wish him the best in his new role at Google!
+                        </p>
+                    </div>
+
+                    <div class="bg-blue-50 p-6 rounded-xl shadow-lg border-l-8 border-blue-600">
+                        <h3 class="text-3xl font-extrabold text-blue-800 mb-2">Quarterly Mugooda Fund Update</h3>
+                        <p class="text-sm font-medium text-slate-500 mb-4">Posted: September 30, 2025 | Category: **Financial**</p>
+                        <p class="text-lg text-slate-700">
+                            The Mugooda Family Support Fund received **$5,000** in contributions this quarter. We were able to provide two educational grants. Please check the Community & Support page for details on how to apply or contribute.
+                        </p>
+                    </div>
+                    
+                    <div class="p-6 bg-slate-100 rounded-xl border border-slate-300 shadow-inner mt-12">
+                        <h3 class="text-2xl font-bold text-primary mb-4">Submit a New Announcement</h3>
+                        <p class="text-sm text-slate-600 mb-4">Only family members with administrative approval can post. This is a simulated submission.</p>
+                        <form onsubmit="event.preventDefault(); handleAnnouncementSubmission(this)">
+                            <input type="text" id="announcement-title" placeholder="Title of Announcement" required class="w-full px-4 py-2 mb-3 border rounded-lg">
+                            <textarea rows="4" id="announcement-details" placeholder="Full announcement details..." required class="w-full px-4 py-2 mb-4 border rounded-lg"></textarea>
+                            <button type="submit" class="px-6 py-2 bg-primary text-white font-bold rounded-lg hover:bg-primary/90 transition">
+                                Submit for Approval
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h3 class="text-2xl font-extrabold text-secondary mb-4 border-b pb-2 border-primary/50">Recent Announcements Submitted</h3>
+                        <div id="recent-announcement-submissions" class="space-y-3">
+                            <p class="text-lg text-slate-500 italic p-4 bg-white rounded-lg shadow-inner">Your submitted announcement will appear here instantly for confirmation.</p>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+
+        <section id="calendar" class="page-section pt-24 pb-12">
+            <div class="p-4 sm:p-8">
+                <h1 class="text-5xl font-extrabold text-slate-800 mb-8 text-center flex items-center justify-center">
+                    <span class="text-4xl text-primary mr-3">🗓️</span> Family Event Calendar
+                </h1>
+                <p class="text-xl text-slate-700 max-w-3xl mx-auto mb-12 text-center">
+                    Keep track of all important Mugooda dates, including birthdays, anniversaries, and official family events.
+                </p>
+
+                <div class="max-w-6xl mx-auto space-y-10">
+
+                    <div class="flex flex-col sm:flex-row justify-between items-center bg-calendar-bg p-4 rounded-xl shadow-inner border border-green-300">
+                        <button onclick="changeMonth(-1)" class="px-4 py-2 bg-secondary text-white font-bold rounded-lg hover:bg-secondary/90 transition mb-3 sm:mb-0">
+                            &larr; Previous Month
+                        </button>
+                        <h2 id="current-month-year" class="text-3xl font-extrabold text-slate-800">
+                            October 2025
+                        </h2>
+                        <button onclick="changeMonth(1)" class="px-4 py-2 bg-secondary text-white font-bold rounded-lg hover:bg-secondary/90 transition">
+                            Next Month &rarr;
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-7 text-center font-bold text-lg text-primary mb-4 border-b pb-2 border-primary/50" id="calendar-header">
+                        <div class="p-2">Sun</div>
+                        <div class="p-2">Mon</div>
+                        <div class="p-2">Tue</div>
+                        <div class="p-2">Wed</div>
+                        <div class="p-2">Thu</div>
+                        <div class="p-2">Fri</div>
+                        <div class="p-2">Sat</div>
+                    </div>
+
+                    <div class="grid grid-cols-7 gap-1 bg-card-calendar p-2 rounded-xl border border-green-300 shadow-lg" id="calendar-grid">
+                        </div>
+
+                    <div class="mt-12 p-6 bg-green-50 rounded-xl shadow-xl border-l-8 border-secondary">
+                        <h3 class="text-3xl font-extrabold text-secondary mb-4">Upcoming Events & Birthdays</h3>
+                        <ul id="event-list" class="space-y-3">
+                            </ul>
+                        <p class="text-center text-lg text-slate-500 mt-6" id="no-events-message">No major events scheduled for this month.</p>
+                    </div>
+
+                    <div class="p-6 bg-slate-100 rounded-xl border border-slate-300 shadow-inner mt-12">
+                        <h3 class="text-2xl font-bold text-primary mb-4">Submit a New Event/Birthday</h3>
+                        <form onsubmit="event.preventDefault(); handleCalendarSubmission(this)">
+                            <input type="text" id="event-name" placeholder="Event Name (e.g., Jane Mugooda's Birthday)" required class="w-full px-4 py-2 mb-3 border rounded-lg">
+                            <input type="date" id="event-date" required class="w-full px-4 py-2 mb-3 border rounded-lg">
+                            <textarea rows="2" id="event-description" placeholder="Brief Description/Details..." class="w-full px-4 py-2 mb-4 border rounded-lg"></textarea>
+                            <button type="submit" class="px-6 py-2 bg-primary text-white font-bold rounded-lg hover:bg-primary/90 transition">
+                                Submit Event
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h3 class="text-2xl font-extrabold text-secondary mb-4 border-b pb-2 border-green-300">Recently Submitted Events</h3>
+                        <div id="recent-calendar-submissions" class="space-y-3">
+                            <p class="text-lg text-slate-500 italic p-4 bg-white rounded-lg shadow-inner">Your submitted events will appear here instantly for confirmation.</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+
+        <section id="contacts" class="page-section pt-24 pb-12">
+            <div class="p-4 sm:p-8">
+                <h1 class="text-5xl font-extrabold text-slate-800 mb-8 text-center">Get In Touch</h1>
+                <p class="text-xl text-slate-700 max-w-3xl mx-auto mb-12 text-center">
+                    We'd love to hear from you! Fill out the form below or use our contact details to reach out.
+                </p>
+
+                <div class="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <div class="p-6 bg-card-contacts rounded-lg shadow-md border-t-4 border-primary border border-pink-300">
+                        <form onsubmit="event.preventDefault(); showMessageModal('Thank you!', 'Your message has been successfully received. We will respond shortly.')">
+                            <div class="mb-4">
+                                <label for="contact-name" class="block text-sm font-medium text-slate-700">Name</label>
+                                <input type="text" id="contact-name" name="name" required class="mt-1 block w-full px-3 py-2 border border-pink-400 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary bg-pink-50 text-slate-800">
+                            </div>
+                            <div class="mb-4">
+                                <label for="contact-email" class="block text-sm font-medium text-slate-700">Email</label>
+                                <input type="email" id="contact-email" name="email" required class="mt-1 block w-full px-3 py-2 border border-pink-400 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary bg-pink-50 text-slate-800">
+                            </div>
+                            <div class="mb-6">
+                                <label for="message" class="block text-sm font-medium text-slate-700">Message</label>
+                                <textarea id="message" name="message" rows="4" required class="mt-1 block w-full px-3 py-2 border border-pink-400 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary bg-pink-50 text-slate-800"></textarea>
+                            </div>
+                            <button type="submit" class="w-full px-4 py-2 bg-secondary text-white font-bold rounded-lg shadow-lg hover:bg-secondary/90 transition duration-150">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="p-6 bg-card-contacts rounded-lg shadow-md flex flex-col justify-center border border-pink-300">
+                        <h3 class="text-3xl font-bold text-slate-800 mb-6">Our Details</h3>
+                        <div class="space-y-4">
+                            <p class="flex items-center text-lg text-slate-700">
+                                <span class="text-primary mr-3 text-xl">&#9993;</span>
+                                Email: <a href="TIM:timleader26@gmail.com" class="ml-2 hover:text-primary transition">infomugoodafamilyweb.com</a>
+                            </p>
+                            <p class="flex items-center text-lg text-slate-700">
+                                <span class="text-primary mr-3 text-xl">&#9742;</span>
+                                Phone: <a href="tel:+1234567890" class="ml-2 hover:text-primary transition">(123) 456-7890</a>
+                            </p>
+                            <p class="flex items-start text-lg text-slate-700">
+                                <span class="text-primary mr-3 text-xl">&#x1F3E2;</span>
+                                Address: <span class="ml-2">123 Design St, Suite 400, Creative City, CA 90210</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-footer-bg mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-medium-text">
+            <p>&copy; 2025 MUGOODAWeb. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div id="message-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 transition-opacity duration-300">
+        <div class="bg-card-photos p-8 rounded-xl shadow-2xl max-w-sm w-full text-center transform transition-all duration-300 scale-95 opacity-0 border border-blue-300" id="modal-content">
+            <h3 id="modal-title" class="text-2xl font-bold text-primary mb-4"></h3>
+            <p id="modal-message" class="text-slate-700 mb-6"></p>
+            <button onclick="closeMessageModal()" class="px-6 py-2 bg-primary text-white font-semibold rounded-full hover:bg-primary/90 transition">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <div id="upload-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 transition-opacity duration-300">
+        <div class="bg-card-photos p-8 rounded-xl shadow-2xl max-w-lg w-full transform transition-all duration-300 scale-95 opacity-0 border border-blue-300" id="upload-modal-content">
+            <h3 class="text-2xl font-bold text-primary mb-4">Post Picture for <span id="family-name-upload" class="text-secondary"></span></h3>
+            <p class="text-slate-700 mb-6">Select an image to post to this family's profile. (Simulated upload)</p>
+            
+            <form onsubmit="event.preventDefault(); handleUpload(document.getElementById('family-id').value)">
+                <input type="hidden" id="family-id" value="">
+                
+                <div class="mb-6">
+                    <label for="image-upload" class="block text-sm font-medium text-slate-700 mb-2">Image File</label>
+                    <input type="file" id="image-upload" name="image-upload" accept="image/*" required class="block w-full text-sm text-slate-600 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/20 file:text-primary hover:file:bg-primary/30 transition duration-150">
+                </div>
+                
+                <div class="flex justify-end space-x-4">
+                    <button type="button" onclick="closeUploadModal()" class="px-4 py-2 text-slate-700 border border-blue-400 rounded-lg hover:bg-blue-100 transition">Cancel</button>
+                    <button type="submit" class="px-6 py-2 bg-secondary text-white font-semibold rounded-lg shadow-lg hover:bg-secondary/90 transition">
+                        Upload Image
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Global arrays to simulate storing data
+        const registeredYouth = []; 
+        const youthContentArchive = []; 
+        const recentSubmissions = []; // For Youth Content (Still pending review)
+        const recentCalendarSubmissions = []; // For Calendar Events (NOW INSTANT)
+        const recentAnnouncementSubmissions = []; // For Announcements (NOW INSTANT)
+        
+        // Global variable for calendar state
+        let currentCalendarDate = new Date(); 
+
+        // Updated pages array to include the new calendar page
+        const pages = ['home', 'photos', 'about', 'contacts', 'announcements', 'calendar', 'family-gallery-view', 'our-heritage-details', 'community-support-details', 'future-generations-details', 'registered-youth-list', 'content-submission', 'content-archive']; 
+        
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const messageModal = document.getElementById('message-modal');
+        const modalContent = document.getElementById('modal-content');
+        const modalTitle = document.getElementById('modal-title');
+        const modalMessage = document.getElementById('modal-message');
+
+        const uploadModal = document.getElementById('upload-modal');
+        const uploadModalContent = document.getElementById('upload-modal-content');
+        const familyNameDisplay = document.getElementById('family-name-upload');
+        const familyIdInput = document.getElementById('family-id');
+        
+        const galleryHeader = document.getElementById('gallery-header');
+        const familyInitialImage = document.getElementById('family-initial-image');
+        const familyImagesContainer = document.getElementById('family-images-container');
+        
+        const registeredYouthContainer = document.getElementById('registered-youth-container');
+        const contentArchiveContainer = document.getElementById('content-archive-container');
+
+
+        // Family data structure (retained for photos functionality)
+        const familyData = {
+            'CEASER FAMILY': { 
+                url: "https://assets-c4c042d3-1d67-4632-8418-4d6b67773295.s3.amazonaws.com/CEASER_FAMILY_A_diverse_family_of_four_engaged_in_mountain_climbing_at_sunrise._They_are_roped_together_ascending_a_snowy_rocky_peak_above_the_clouds_demonstrating_strength_and_resilience._8k_photorealistic._-_051b9e07-3531-4e78-be7f-85f81f9f238b.png", 
+                images: [] 
+            },
+            'MUDANYE FAMILY': { 
+                url: "https://assets-c4c042d3-1d67-4632-8418-4d6b67773295.s3.amazonaws.com/MUDANYE_FAMILY_A_joyful_Black_family_with_two_parents_and_three_children_laughing_and_playing_in_a_sunny_field_with_dandelions._The_father_has_one_child_on_his_shoulders_and_the_other_two_are_hugging_their_mother._Golden_hour_lighting._8k_photorealistic._-_f02dd9f0-2527-4a7b-a010-388f62363558.png", 
+                images: [] 
+            },
+            'MUSIMAMI FAMILY': { 
+                url: "https://assets-c4c042d3-1d67-4632-8418-4d6b67773295.s3.amazonaws.com/MUSIMAMI_FAMILY_A_diverse_family_of_three_parents_and_one_child_meditating_together_in_a_serene_Japanese_garden_setting._The_atmosphere_is_peaceful_and_calm_with_a_small_waterfall_in_the_background._Soft_morning_light._8k_photorealistic._-_052f750b-8d05-4c6e-81f1-b92451f2d34a.png", 
+                images: [] 
+            },
+            'SEMPANGI FAMILY': { 
+                url: "https://assets-c4c042d3-1d67-4632-8418-4d6b67773295.s3.amazonaws.com/SEMPANGI_FAMILY_A_multi-generational_Indian_family_sitting_around_a_kitchen_table_laughing_heartily._Sunlight_streams_through_a_window_creating_a_warm_and_inviting_atmosphere._8k_photorealistic._-_2df22c6c-9a4c-473d-9d47-6699d7a22026.png", 
+                images: [] 
+            },
+            'BABIKOBA FAMILY': { 
+                url: "https://assets-c4c042d3-1d67-4632-8418-4d6b67773295.s3.amazonaws.com/BABIKOBA_FAMILY_A_loving_Black_couple_sitting_on_a_sofa_with_their_young_child_between_them._They_are_looking_at_each_other_with_affectionate_smiles_in_a_cozy_living_room_setting._Soft_lighting_creates_a_warm_ambiance._8k_photorealistic._-_f0250d18-77c8-47e1-8884-df919cf62ff8.png", 
+                images: [] 
+            },
+            'BRUNO FAMILY': { 
+                url: "https://assets-c4c042d3-1d67-4632-8418-4d6b67773295.s3.amazonaws.com/BRUNO_FAMILY_A_caring_Asian_mother_and_Caucasian_father_feeding_their_two_young_children_at_a_kitchen_table._The_scene_depicts_gentle_care_and_attention_in_a_bright_home_environment._8k_photorealistic._-_4f7df506-69e3-4c07-b649-1662580ef118.png", 
+                images: [] 
+            },
+            'DOROTHY FAMILY': { 
+                url: "https://assets-c4c042d3-1d67-4632-8418-4d6b67773295.s3.amazonaws.com/DOROTHY_FAMILY_A_multi-generational_family_with_grandparents_parents_and_a_child_all_placing_their_hands_together_in_a_pile_on_a_wooden_table_as_a_symbol_of_unity._A_warm_fireplace_is_in_the_background._8k_photorealistic._-_23d130ed-37c2-40e1-a083-a719d45e5b30.png", 
+                images: [] 
+            },
+            'MONICA FAMILY': { 
+                url: "https://assets-c4c042d3-1d67-4632-8418-4d6b67773295.s3.amazonaws.com/MONICA_FAMILY_A_large_diverse_group_of_people_of_various_ages_and_ethnicities_gathered_in_a_modern_communal_space._They_are_all_interacting_happily_and_inclusively._Daytime_with_natural_light._8k_photorealistic._-_057c0e64-e407-4286-93ed-7517c569f6e9.png", 
+                images: [] 
+            },
+            'PROSSY FAMILY': { 
+                url: "https://assets-c4c042d3-1d67-4632-8418-4d6b67773295.s3.amazonaws.com/PROSSY_FAMILY_A_diverse_family_of_three_generations_praying_together_with_their_hands_clasped_in_a_peaceful_home_setting._Soft_light_highlights_their_expressions_of_reverence_and_hope._8k_photorealistic._-_0c31317d-2b73-41c3-8cc2-005691060447.png", 
+                images: [] 
+            }
+        };
+
+        // --- START Calendar Specific Data and Functions ---
+
+        // Simulated Events and Birthdays (Year independent for recurring events)
+        const familyEvents = [
+            // Current Month is November 2025
+            { date: '1-15', name: "Founder's Day Celebration", type: 'Event' }, // Jan 15th
+            { date: '2-29', name: "Sarah Mugooda's Birthday", type: 'Birthday' }, // Feb 29th
+            { date: '5-05', name: "Annual Picnic Planning Meeting", type: 'Meeting' }, // May 5th
+            { date: '6-21', name: "Joshua & Maria Anniversary", type: 'Anniversary' }, // June 21st
+            { date: '8-17', name: "Mugooda Family Reunion", type: 'Event' }, // Aug 17th
+            { date: '10-25', name: "Timothy Mugooda's Birthday", type: 'Birthday' }, // Oct 25th
+            { date: '11-08', name: "Quarterly Financial Review", type: 'Meeting' }, // Nov 8th
+            { date: '11-28', name: "US Thanksgiving", type: 'Holiday' }, // Nov 28th
+            { date: '12-24', name: "Family Holiday Dinner", type: 'Event' }, // Dec 24th
+        ];
+
+        /**
+         * Initializes and updates the calendar view based on the currentCalendarDate.
+         */
+        function renderCalendar() {
+            const monthYearDisplay = document.getElementById('current-month-year');
+            const calendarGrid = document.getElementById('calendar-grid');
+            const eventListContainer = document.getElementById('event-list');
+            const noEventsMessage = document.getElementById('no-events-message');
+
+            // Set month/year header
+            const month = currentCalendarDate.getMonth();
+            const year = currentCalendarDate.getFullYear();
+            const monthName = currentCalendarDate.toLocaleString('en-US', { month: 'long' });
+            monthYearDisplay.textContent = `${monthName} ${year}`;
+
+            // Get number of days and first day of the month
+            const firstDayOfMonth = new Date(year, month, 1).getDay(); // 0 (Sun) to 6 (Sat)
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            calendarGrid.innerHTML = ''; // Clear previous days
+
+            // 1. Add empty days for the starting week offset
+            for (let i = 0; i < firstDayOfMonth; i++) {
+                calendarGrid.innerHTML += '<div class="p-3 bg-card-calendar text-slate-400"></div>';
+            }
+
+            // 2. Add actual days
+            const today = new Date();
+            const todayStr = `${today.getMonth()}-${today.getDate()}-${today.getFullYear()}`;
+            const currentMonthEvents = [];
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const fullDateStr = `${month + 1}-${day < 10 ? '0' + day : day}`; // Format M-DD
+                const fullDateWithYearStr = `${month}-${day}-${year}`; // For highlighting today
+
+                // Check for events (using M-DD format for recurring events)
+                const dayEvents = familyEvents.filter(event => event.date === fullDateStr);
+
+                let classes = 'p-3 rounded-lg font-medium text-slate-800 transition duration-150 relative border border-green-200 shadow-sm text-lg flex flex-col justify-between items-center h-20';
+                let eventIndicator = '';
+
+                if (dayEvents.length > 0) {
+                    classes += ' bg-green-200 hover:bg-green-300 cursor-pointer border-green-400';
+                    eventIndicator = `<div class="text-sm font-semibold text-secondary mt-1">${dayEvents.length} Event(s)</div>`;
+                    
+                    dayEvents.forEach(event => {
+                        currentMonthEvents.push({ ...event, day: day, fullDate: `${monthName} ${day}, ${year}` });
+                    });
+                } else {
+                    classes += ' bg-white hover:bg-slate-50';
+                }
+
+                // Highlight today's date (M:0 is Jan, M:10 is Nov)
+                if (fullDateWithYearStr === `${today.getMonth()}-${today.getDate()}-${today.getFullYear()}` && today.getMonth() === month && today.getFullYear() === year) {
+                    classes += ' !bg-primary text-white !font-extrabold shadow-lg scale-105';
+                    eventIndicator = `<div class="text-sm font-semibold mt-1 ${dayEvents.length > 0 ? 'text-white' : 'text-medium-text'}">${dayEvents.length > 0 ? `${dayEvents.length} Event(s)` : 'Today'}</div>`;
+                }
+                
+                calendarGrid.innerHTML += `
+                    <div class="${classes}">
+                        <div class="font-bold">${day}</div>
+                        ${eventIndicator}
+                    </div>
+                `;
+            }
+
+            // 3. Render the Event List
+            eventListContainer.innerHTML = ''; 
+            if (currentMonthEvents.length > 0) {
+                currentMonthEvents.sort((a, b) => a.day - b.day); // Sort by day
+                noEventsMessage.style.display = 'none';
+
+                currentMonthEvents.forEach(event => {
+                    let icon = '';
+                    let color = 'text-primary';
+                    
+                    switch(event.type) {
+                        case 'Birthday': icon = '🎂'; color = 'text-yellow-600'; break;
+                        case 'Anniversary': icon = '🥂'; color = 'text-pink-600'; break;
+                        case 'Event': icon = '🎉'; color = 'text-secondary'; break;
+                        case 'Meeting': icon = '📝'; color = 'text-blue-600'; break;
+                        case 'Holiday': icon = '🎁'; color = 'text-red-600'; break;
+                    }
+                    
+                    eventListContainer.innerHTML += `
+                        <li class="flex items-center space-x-3 p-3 bg-white rounded-lg shadow-md border-l-4 border-secondary">
+                            <span class="text-2xl">${icon}</span>
+                            <p class="text-lg text-slate-800">
+                                <span class="font-bold mr-2 ${color}">${event.fullDate}:</span>
+                                ${event.name}
+                                <span class="text-xs text-slate-500 ml-2">(${event.type})</span>
+                            </p>
+                        </li>
+                    `;
+                });
+            } else {
+                noEventsMessage.style.display = 'block';
+            }
+        }
+
+        /**
+         * Changes the month displayed in the calendar.
+         * @param {number} delta - +1 for next month, -1 for previous month.
+         */
+        function changeMonth(delta) {
+            currentCalendarDate.setMonth(currentCalendarDate.getMonth() + delta);
+            renderCalendar();
+        }
+
+        /**
+         * Handles the calendar event submission.
+         * @param {HTMLFormElement} form - The form element itself.
+         */
+        function handleCalendarSubmission(form) {
+            const name = form.querySelector('#event-name').value.trim();
+            const date = form.querySelector('#event-date').value;
+            const description = form.querySelector('#event-description').value.trim();
+            
+            // Simple validation
+            if (!name || !date) {
+                showMessageModal('Submission Error', 'Please fill out the event name and date.', 'error');
+                return;
+            }
+
+            const submittedDate = new Date(date + 'T00:00:00'); // Use T00:00:00 to avoid timezone issues
+            const dateString = submittedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+            const newSubmission = { name, dateString, description };
+            recentCalendarSubmissions.push(newSubmission);
+            
+            // 1. Display success message
+            showMessageModal('Event Submitted!', `Your event **${name}** on **${dateString}** has been instantly posted!`);
+            
+            // 2. Render the recent list
+            renderRecentCalendarSubmissions();
+            
+            // 3. Clear the form
+            form.reset();
+        }
+
+        /**
+         * Renders the content submitted in the current session right below the calendar form.
+         * Status indicator is removed to simulate instant posting.
+         */
+        function renderRecentCalendarSubmissions() {
+            const container = document.getElementById('recent-calendar-submissions');
+            if (!container) return; 
+
+            container.innerHTML = ''; // Clear previous content
+
+            if (recentCalendarSubmissions.length === 0) {
+                container.innerHTML = '<p class="text-lg text-slate-500 italic p-4 bg-white rounded-lg shadow-inner">Your submitted events will appear here instantly for confirmation.</p>';
+                return;
+            }
+
+            // Iterate over the content in reverse order (newest first)
+            [...recentCalendarSubmissions].reverse().forEach((item) => {
+                container.innerHTML += `
+                    <div class="bg-white p-4 rounded-lg shadow border-l-4 border-primary/50">
+                        <h4 class="text-xl font-bold text-slate-800">${item.name}</h4>
+                        <p class="text-sm font-medium text-slate-500 mb-2">Date: ${item.dateString}</p>
+                        <p class="text-base text-slate-700 italic border-t pt-2 mt-2">
+                            Details: ${item.description || 'No description provided.'}
+                        </p>
+                    </div>
+                `;
+            });
+        }
+
+        // --- END Calendar Specific Data and Functions ---
+        
+        // --- START Announcement Specific Functions ---
+        
+        /**
+         * Handles the announcement form submission.
+         * @param {HTMLFormElement} form - The form element itself.
+         */
+        function handleAnnouncementSubmission(form) {
+            const title = form.querySelector('#announcement-title').value.trim();
+            const details = form.querySelector('#announcement-details').value.trim();
+            
+            // Simple validation
+            if (!title || !details) {
+                showMessageModal('Submission Error', 'Please fill out both the title and the details.', 'error');
+                return;
+            }
+            
+            const submissionTime = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+            const newSubmission = { title, details, date: submissionTime };
+            recentAnnouncementSubmissions.push(newSubmission);
+            
+            // 1. Display success message
+            showMessageModal('Announcement Posted!', `Your announcement **"${title}"** has been instantly posted!`);
+            
+            // 2. Render the recent list
+            renderRecentAnnouncementSubmissions();
+            
+            // 3. Clear the form
+            form.reset();
+        }
+
+        /**
+         * Renders the content submitted in the current session right below the announcement form.
+         * Status indicator is removed to simulate instant posting.
+         */
+        function renderRecentAnnouncementSubmissions() {
+            const container = document.getElementById('recent-announcement-submissions');
+            if (!container) return; 
+
+            container.innerHTML = ''; // Clear previous content
+
+            if (recentAnnouncementSubmissions.length === 0) {
+                container.innerHTML = '<p class="text-lg text-slate-500 italic p-4 bg-white rounded-lg shadow-inner">Your submitted announcement will appear here instantly for confirmation.</p>';
+                return;
+            }
+
+            // Iterate over the content in reverse order (newest first)
+            [...recentAnnouncementSubmissions].reverse().forEach((item) => {
+                container.innerHTML += `
+                    <div class="bg-white p-4 rounded-lg shadow border-l-4 border-secondary/50">
+                        <h4 class="text-xl font-bold text-slate-800">${item.title}</h4>
+                        <p class="text-sm font-medium text-slate-500 mb-2">Submitted: ${item.date}</p>
+                        <p class="text-base text-slate-700 italic border-t pt-2 mt-2">
+                            Summary: ${item.details.substring(0, 150)}...
+                        </p>
+                    </div>
+                `;
+            });
+        }
+        
+        // --- END Announcement Specific Functions ---
+
+        /**
+         * Renders the simulated gallery view for a specific family.
+         */
+        function handleViewGallery(familyName) {
+            const data = familyData[familyName];
+
+            galleryHeader.textContent = `Gallery for ${familyName}`;
+            familyInitialImage.src = data.url;
+            familyImagesContainer.innerHTML = ''; // Clear existing images
+
+            // Add the main profile image
+            familyImagesContainer.innerHTML += `
+                <div class="bg-blue-100 rounded-lg shadow-inner overflow-hidden border border-blue-300">
+                    <img src="${data.url}" alt="${familyName} Profile Picture" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <p class="text-sm text-blue-800">Family Profile Image</p>
+                    </div>
+                </div>
+            `;
+            
+            if (data.images.length > 0) {
+                document.getElementById('gallery-status').textContent = `${data.images.length + 1} image(s) currently viewable.`;
+                data.images.forEach((imageURL, index) => {
+                    familyImagesContainer.innerHTML += `
+                        <div class="bg-blue-100 rounded-lg shadow-md overflow-hidden border-2 border-blue-400">
+                            <img src="${imageURL}" alt="${familyName} Posted Image ${index + 1}" class="w-full h-64 object-cover">
+                            <div class="p-4">
+                                <p class="text-sm text-blue-800 font-medium">New Post #${index + 1}</p>
+                            </div>
+                        </div>
+                    `;
+                });
+            } else {
+                document.getElementById('gallery-status').textContent = `Viewing Initial Image.`;
+                familyImagesContainer.innerHTML += `
+                    <div class="col-span-1 md:col-span-2 p-6 bg-blue-50 rounded-lg flex items-center justify-center border-2 border-dashed border-blue-300 text-blue-700">
+                        <p class="text-xl">No other images have been posted yet. Click **Post a New Picture** above to add one!</p>
+                    </div>
+                `;
+            }
+
+            showPage('family-gallery-view');
+        }
+
+        /**
+         * Handles the registration form submission for young Mugoodas.
+         */
+        function handleMugoodaRegistration() {
+            const firstName = document.getElementById('first-name').value.trim();
+            const familyName = document.getElementById('family-name').value.trim();
+            const fullName = `${firstName} ${familyName}`;
+
+            if (firstName && familyName) {
+                
+                // 1. Store the name (simulated)
+                if (!registeredYouth.includes(fullName)) {
+                    registeredYouth.push(fullName);
+                }
+
+                // 2. Display success message
+                showMessageModal(
+                    '🎉 Registration Successful!',
+                    `Welcome, **${fullName}**! Your registration has been submitted. You can now view your name on the **Registered Youth List** page.`
+                );
+
+                // 3. Clear the form fields
+                document.getElementById('first-name').value = '';
+                document.getElementById('family-name').value = '';
+
+                // 4. Update the list display immediately
+                renderRegisteredYouthList();
+
+            } else {
+                 showMessageModal(
+                    'Registration Incomplete',
+                    'Please fill out both your First Name and Family Name to register.',
+                    'error'
+                );
+            }
+        }
+
+        /**
+         * Renders the list of registered names on the dedicated page.
+         */
+        function renderRegisteredYouthList() {
+            const container = document.getElementById('registered-youth-container');
+            if (!container) return; 
+
+            container.innerHTML = ''; // Clear previous content
+
+            if (registeredYouth.length === 0) {
+                container.innerHTML = '<p class="text-lg text-slate-500 italic">No registrations submitted yet. Use the registration form on the previous page!</p>';
+                return;
+            }
+
+            // Create list items for each registered name
+            registeredYouth.forEach((name, index) => {
+                container.innerHTML += `
+                    <div class="flex justify-between items-center p-3 border-b last:border-b-0 border-amber-100 bg-white hover:bg-amber-50 transition rounded">
+                        <p class="text-lg font-medium text-slate-800">${name}</p>
+                        <span class="text-sm text-amber-600 font-bold">#${index + 1}</span>
+                    </div>
+                `;
+            });
+        }
+
+        /**
+         * Renders the list of submitted content on the dedicated archive page.
+         */
+        function renderContentArchive() {
+            const container = document.getElementById('content-archive-container');
+            if (!container) return; 
+
+            container.innerHTML = ''; // Clear previous content
+
+            if (youthContentArchive.length === 0) {
+                container.innerHTML = '<p class="text-lg text-slate-500 italic p-6 bg-white rounded-lg shadow-inner border border-amber-200">No content has been published yet. Be the first to submit!</p>';
+                return;
+            }
+
+            // Iterate over the content in reverse order (newest first)
+            [...youthContentArchive].reverse().forEach((item, index) => {
+                container.innerHTML += `
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-amber-600 hover:shadow-2xl transition duration-200">
+                        <div class="flex justify-between items-start mb-3 border-b pb-2 border-amber-100">
+                            <h3 class="text-3xl font-extrabold text-slate-800">${item.title}</h3>
+                            <span class="text-sm font-semibold text-slate-500 ml-4">${item.date}</span>
+                        </div>
+                        <p class="text-sm text-amber-700 font-medium mb-4">By: ${item.name}</p>
+                        <div class="text-base text-slate-700 whitespace-pre-wrap">
+                            ${item.content.length > 500 
+                                ? item.content.substring(0, 500) + '... (Click to read full article)'
+                                : item.content
+                            }
+                        </div>
+                        
+                        ${item.content.length > 500 ? `<button onclick="showMessageModal('${item.title} - Full Article', '<div class=\'text-left whitespace-pre-wrap\'>**By ${item.name}**<br>${item.content}</div>')" class="mt-4 px-4 py-1.5 bg-amber-500 text-white font-medium rounded-full text-sm hover:bg-amber-600 transition">Read Full Article</button>` : ''}
+                    </div>
+                `;
+            });
+        }
+        
+        /**
+         * Handles the content submission form.
+         */
+        function handleSubmitContent() {
+            const name = document.getElementById('submit-name').value.trim();
+            const title = document.getElementById('content-title').value.trim();
+            const content = document.getElementById('content-text').value.trim();
+
+            if (!name || !title || !content) {
+                showMessageModal('Submission Error', 'All fields must be filled out to submit content.', 'error');
+                return;
+            }
+
+            // Check if the name is registered (simple simulation)
+            if (!registeredYouth.includes(name)) {
+                showMessageModal(
+                    'Verification Required',
+                    'The name you entered is **not found** in the Registered Youth List. Please register your full name first or ensure the name matches exactly.',
+                    'error'
+                );
+                return;
+            }
+
+            const submissionTime = new Date().toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            const newSubmission = {
+                name: name,
+                title: title,
+                content: content,
+                date: submissionTime
+            };
+            
+            // 1. Store the submitted content in both the immediate array and the archive array
+            recentSubmissions.push(newSubmission);
+            youthContentArchive.push(newSubmission); 
+
+            // Simulated successful submission
+            showMessageModal(
+                '📝 Content Submitted!',
+                `Thank You, **${name}**! Your content titled **"${title}"** has been securely submitted to the family elders for review and archival. It appears below immediately!`
+            );
+
+            // 2. Clear the form 
+            document.getElementById('submit-name').value = '';
+            document.getElementById('content-title').value = '';
+            document.getElementById('content-text').value = '';
+
+            // 3. Render the newly submitted content
+            renderRecentSubmissions(); 
+
+            // 4. Update the archive list in case the user navigates there
+            renderContentArchive();
+        }
+        
+        /**
+         * Renders the content submitted in the current session right below the form.
+         * Note: Youth content is still considered "Pending Review" by the elders in this simulation.
+         */
+        function renderRecentSubmissions() {
+            const container = document.getElementById('recent-submissions-container');
+            if (!container) return; 
+
+            container.innerHTML = ''; // Clear previous content
+
+            if (recentSubmissions.length === 0) {
+                container.innerHTML = '<p class="text-lg text-slate-500 italic p-4 bg-white rounded-lg shadow-inner">Your submissions will appear here instantly upon submission.</p>';
+                return;
+            }
+
+            // Iterate over the content in reverse order (newest first)
+            [...recentSubmissions].reverse().forEach((item) => {
+                container.innerHTML += `
+                    <div class="bg-white p-4 rounded-lg shadow border-l-4 border-secondary/50">
+                        <h4 class="text-xl font-bold text-slate-800">${item.title}</h4>
+                        <p class="text-sm font-medium text-slate-500 mb-2">Submitted by: ${item.name} on ${item.date}</p>
+                        <p class="text-base text-slate-700 italic border-t pt-2 mt-2">
+                            "${item.content.substring(0, 150)}..."
+                        </p>
+                        <span class="text-xs text-secondary mt-1 block">Status: Pending Elder Review and Archival.</span>
+                    </div>
+                `;
+            });
+        }
+        
+        // --- Modal/Upload Functions (retained for completeness) ---
+        function openUploadModal(familyName) {
+            familyNameDisplay.textContent = familyName;
+            familyIdInput.value = familyName;
+            uploadModal.classList.remove('hidden');
+            uploadModal.classList.add('flex', 'opacity-100');
+            setTimeout(() => {
+                uploadModalContent.classList.remove('scale-95', 'opacity-0');
+                uploadModalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeUploadModal() {
+            uploadModalContent.classList.remove('scale-100', 'opacity-100');
+            uploadModalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                uploadModal.classList.remove('flex', 'opacity-100');
+                uploadModal.classList.add('hidden');
+                document.getElementById('image-upload').value = ''; 
+            }, 300);
+        }
+
+        function handleUpload(familyName) {
+            const fileInput = document.getElementById('image-upload');
+            const file = fileInput.files[0];
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const newImageURL = e.target.result;
+                    familyData[familyName].images.push(newImageURL);
+                    
+                    closeUploadModal();
+                    
+                    showMessageModal('Upload Successful!', `A new picture has been added to the **${familyName}** gallery!`);
+                    handleViewGallery(familyName); 
+                };
+                reader.readAsDataURL(file);
+
+            } else {
+                closeUploadModal();
+                showMessageModal('Upload Failed', 'Please select a file to upload.', 'error');
+            }
+        }
+        
+        function showMessageModal(title, message) {
+            modalTitle.innerHTML = title;
+            modalMessage.innerHTML = message;
+            messageModal.classList.remove('hidden');
+            modalContent.classList.remove('scale-95', 'opacity-0');
+            modalContent.classList.add('scale-100', 'opacity-100');
+            messageModal.classList.add('flex', 'opacity-100');
+        }
+
+        function closeMessageModal() {
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+
+            setTimeout(() => {
+                messageModal.classList.remove('flex', 'opacity-100');
+                messageModal.classList.add('hidden');
+            }, 300);
+        }
+        // --- End Modal/Upload Functions ---
+
+
+        /**
+         * Shows the specified page section and updates the navigation link active state.
+         * @param {string} pageId The ID of the section to show (e.g., 'home').
+         */
+        function showPage(pageId) {
+            if (!pages.includes(pageId)) {
+                pageId = 'home';
+            }
+            
+            // Ensure the lists are rendered if we are navigating to those pages
+            if (pageId === 'registered-youth-list') {
+                renderRegisteredYouthList();
+            } else if (pageId === 'content-archive') {
+                renderContentArchive();
+            } else if (pageId === 'calendar') {
+                renderCalendar();
+                renderRecentCalendarSubmissions();
+            } else if (pageId === 'announcements') {
+                renderRecentAnnouncementSubmissions();
+            } else if (pageId === 'content-submission') {
+                renderRecentSubmissions(); 
+            }
+
+
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.style.display = 'none';
+                section.style.opacity = '0';
+            });
+
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                if (targetPage.classList.contains('flex') || pageId === 'family-gallery-view') {
+                    targetPage.style.display = 'flex';
+                } else {
+                    targetPage.style.display = 'block';
+                }
+                
+                setTimeout(() => {
+                    targetPage.style.opacity = '1';
+                }, 10);
+            }
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('bg-primary/20', 'text-light-text', 'font-extrabold', 'text-primary');
+                link.classList.add('text-medium-text');
+
+                // Determine the active top-level page for navigation highlighting
+                let activePage = pageId;
+                if (['family-gallery-view'].includes(pageId)) {
+                    activePage = 'photos';
+                } else if (['our-heritage-details', 'community-support-details', 'future-generations-details', 'registered-youth-list', 'content-submission', 'content-archive'].includes(pageId)) {
+                    activePage = 'about'; // Highlight 'ABOUT US' nav link for detail pages
+                }
+
+                if (link.dataset.page === activePage) {
+                    link.classList.add('font-extrabold');
+                    // For desktop nav links
+                    if (link.classList.contains('p-2')) {
+                        link.classList.remove('text-medium-text');
+                        link.classList.add('text-light-text'); 
+                    }
+                    // For mobile nav links
+                    if (link.classList.contains('px-3')) {
+                        link.classList.add('bg-primary/20', 'text-light-text');
+                    }
+                }
+            });
+
+            if (window.location.hash !== '#' + pageId) {
+                window.history.pushState(null, null, '#' + pageId);
+            }
+
+            mobileMenu.classList.add('hidden');
+        }
+        
+        /**
+         * Handles the initial load and hash changes for navigation.
+         */
+        function handleLoadAndHashChange() {
+            const hash = window.location.hash.substring(1);
+            showPage(hash || 'home');
+        }
+
+        // --- Event Listeners ---
+        document.addEventListener('DOMContentLoaded', () => {
+             handleLoadAndHashChange();
+             window.addEventListener('hashchange', handleLoadAndHashChange);
+
+             mobileMenuButton.addEventListener('click', () => {
+                 mobileMenu.classList.toggle('hidden');
+             });
+
+             // Initialize the youth lists display
+             renderRegisteredYouthList();
+             renderContentArchive();
+             renderCalendar();
+             
+             // Initialize the recent submissions lists on load
+             renderRecentSubmissions();
+             renderRecentCalendarSubmissions();
+             renderRecentAnnouncementSubmissions();
+        });
+    </script>
+</body>
+</html>
