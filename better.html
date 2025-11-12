@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEE PACE</title>
+    
+    <style>
+        /* --- CSS Stylesheet --- */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            color: #333;
+            scroll-behavior: smooth; /* Enables smooth scrolling */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- Navigation Bar Styling --- */
+        nav {
+            background-color: #007bff; /* Primary Blue */
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky; /* Keeps nav bar fixed at the top */
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #0056b3;
+        }
+
+        /* --- Section Styling --- */
+        .section {
+            padding: 80px 20px;
+            margin: 0;
+            background-color: white;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        #home { background-color: #e6f0ff; }
+        #contact { background-color: #fff; }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #007bff;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #343a40;
+            margin-top: 25px;
+        }
+
+        /* --- Card and List Styles --- */
+        .card {
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            background-color: #f9f9f9;
+        }
+        
+        ul { list-style-type: none; padding: 0; }
+        ul li.card { margin-top: 15px; }
+
+        /* --- Form Specific Styles (Contact Section) --- */
+        form { background-color: #f4f4f4; padding: 25px; border-radius: 8px; margin-top: 30px; }
+        form label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        form input[type="text"], 
+        form input[type="email"], 
+        form textarea {
+            width: 98%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; 
+        }
+
+        form input[type="submit"] {
+            background-color: #28a745; 
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #1e7e34;
+        }
+        
+        /* --- Footer Styling --- */
+        footer {
+            background-color: #343a40; /* Dark Gray/Black */
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: auto; /* Pushes footer to the bottom */
+        }
+
+        footer a {
+            color: #007bff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#service">Service</a>
+        <a href="#features">Features</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <section id="home" class="section">
+        <div class="container">
+            <h1>Welcome to Our Unified Website!</h1>
+            <p>We are dedicated to providing the best solutions for your needs. Use the navigation above to explore all our sections on this single page.</p>
+            
+            <div class="card">
+                <h2>Our Mission</h2>
+                <p>To deliver innovative, reliable, and user-focused technology solutions that drive business success and growth efficiently.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="service" class="section">
+        <div class="container">
+            <h1>Our Core Services</h1>
+            <p>We offer a range of specialized services tailored to meet diverse client requirements.</p>
+
+            <div class="card">
+                <h3>Web Development</h3>
+                <p>Creating modern, responsive, and high-performance websites using the latest industry standards.</p>
+            </div>
+
+            <div class="card">
+                <h3>Cloud Solutions</h3>
+                <p>Secure and scalable cloud hosting, migration, and infrastructure management tailored for efficiency.</p>
+            </div>
+
+            <div class="card">
+                <h3>Digital Marketing</h3>
+                <p>Strategies, SEO, and targeted campaigns to boost your online presence and reach your target audience globally.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="section">
+        <div class="container">
+            <h1>Key Features That Set Us Apart</h1>
+            <p>Our commitment to excellence is reflected in the features we offer across all our products and services:</p>
+
+            <ul>
+                <li class="card">**24/7 Premium Support:** Dedicated support team available around the clock via chat, phone, and email.</li>
+                <li class="card">**Infinite Scalability:** Effortlessly handle growing demands from hundreds to millions of users.</li>
+                <li class="card">**Intuitive UI/UX:** Modern, user-friendly interface designed for an excellent, accessible user experience.</li>
+                <li class="card">**Bank-Grade Security:** State-of-the-art encryption, multi-factor authentication, and robust security protocols.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="container">
+            <h1>Get In Touch With Our Team</h1>
+            <p>We'd love to hear from you! Reach out via the form or use the contact details below.</p>
+
+            <h2>Contact Information</h2>
+            <p>Email: **info@example.com**</p>
+            <p>Phone: **(555) 123-4567**</p>
+            <p>Address: **123 Business Rd, Tech City, Country**</p>
+
+            <h2>Send Us a Message</h2>
+            <form action="#" method="POST">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Your Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+
+                <input type="submit" value="Submit Message">
+            </form>
+        </div>
+    </section>
+    
+    <footer>
+        &copy; 2025 My Company. All rights reserved. | 
+        <a href="#home">Privacy Policy</a> | 
+        <a href="#home">Terms of Service</a>
+    </footer>
+
+</body>
+</html>
