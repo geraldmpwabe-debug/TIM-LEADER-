@@ -1,0 +1,1999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUGOODA FAMILY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // --- Core Palette (UPDATED) ---
+                        'marine-blue': '#004D7A', // Deep Blue/Teal (Primary: Trust, Stability)
+                        'coral-accent': '#FF6B6B', // Vibrant Coral (Secondary: Action, Energy, Connection)
+                        
+                        // --- Backgrounds/Surfaces ---
+                        'light-cream': '#F7F4F0', // Soft, Off-White Page Background
+                        'dark-slate': '#2C3E50', // Dark Navy/Slate (Header/Footer)
+                        'card-photos': '#FFFFFF', // White
+                        'card-calendar': '#E6F3FF', // Light blue tint
+                        
+                        // --- Text Colors ---
+                        'light-text': '#FFFFFF',
+                        'medium-text': '#BDC3C7', // Light gray for inactive links
+                        'deep-text': '#1F2937', // Near-Black for general body text
+                    },
+                    fontFamily: {
+                         // Added a fallback for better aesthetics
+                        'sans': ['Inter', 'system-ui', 'sans-serif'], 
+                    },
+                },
+            }
+        }
+    </script>
+
+    <style>
+        .page-section {
+            transition: opacity 0.5s ease-in-out;
+            min-height: calc(100vh - 200px); /* Ensure minimum height for pages */
+        }
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-light-cream font-sans text-deep-text">
+
+    <nav class="bg-dark-slate shadow-lg sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <span class="text-3xl font-extrabold text-light-text tracking-wider">MUGOODAfamily</span>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:space-x-4 items-center">
+                    <a href="#home" onclick="showPage('home')" class="nav-link text-medium-text hover:text-light-text px-2 py-2 text-sm font-medium transition duration-150" data-page="home">Home</a>
+                    <a href="#photos" onclick="showPage('photos')" class="nav-link text-medium-text hover:text-light-text px-2 py-2 text-sm font-medium transition duration-150" data-page="photos">Family Photos</a>
+                    <a href="#videos" onclick="showPage('videos')" class="nav-link text-medium-text hover:text-light-text px-2 py-2 text-sm font-medium transition duration-150" data-page="videos">Family Videos</a>
+                    <a href="#saved-images" onclick="showPage('saved-images')" class="nav-link text-medium-text hover:text-light-text px-2 py-2 text-sm font-medium transition duration-150" data-page="saved-images">My Saved Images</a>
+                    <a href="#announcements" onclick="showPage('announcements')" class="nav-link text-medium-text hover:text-light-text px-2 py-2 text-sm font-medium transition duration-150" data-page="announcements">Announcements</a>
+                    <a href="#calendar" onclick="showPage('calendar')" class="nav-link text-medium-text hover:text-light-text px-2 py-2 text-sm font-medium transition duration-150" data-page="calendar">Calendar</a>
+                    <a href="#about" onclick="showPage('about')" class="nav-link text-medium-text hover:text-light-text px-2 py-2 text-sm font-medium transition duration-150" data-page="about">About Us</a>
+                    <a href="#contacts" onclick="showPage('contacts')" class="nav-link text-medium-text hover:text-light-text px-2 py-2 text-sm font-medium transition duration-150" data-page="contacts">Contacts</a>
+                </div>
+                <div class="-mr-2 flex items-center sm:hidden">
+                    <button id="mobile-menu-button" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-medium-text hover:text-light-text hover:bg-marine-blue/80 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white transition" aria-controls="mobile-menu" aria-expanded="false">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    
+        <div class="sm:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" onclick="showPage('home')" class="nav-link text-medium-text hover:bg-marine-blue/20 hover:text-light-text block px-3 py-2 rounded-md text-base font-medium transition" data-page="home">Home</a>
+                <a href="#photos" onclick="showPage('photos')" class="nav-link text-medium-text hover:bg-marine-blue/20 hover:text-light-text block px-3 py-2 rounded-md text-base font-medium transition" data-page="photos">Family Photos</a>
+                <a href="#videos" onclick="showPage('videos')" class="nav-link text-medium-text hover:bg-marine-blue/20 hover:text-light-text block px-3 py-2 rounded-md text-base font-medium transition" data-page="videos">Family Videos</a>
+                <a href="#saved-images" onclick="showPage('saved-images')" class="nav-link text-medium-text hover:bg-marine-blue/20 hover:text-light-text block px-3 py-2 rounded-md text-base font-medium transition" data-page="saved-images">My Saved Images</a>
+                <a href="#announcements" onclick="showPage('announcements')" class="nav-link text-medium-text hover:bg-marine-blue/20 hover:text-light-text block px-3 py-2 rounded-md text-base font-medium transition" data-page="announcements">Announcements</a>
+                <a href="#calendar" onclick="showPage('calendar')" class="nav-link text-medium-text hover:bg-marine-blue/20 hover:text-light-text block px-3 py-2 rounded-md text-base font-medium transition" data-page="calendar">Calendar</a>
+                <a href="#about" onclick="showPage('about')" class="nav-link text-medium-text hover:bg-marine-blue/20 hover:text-light-text block px-3 py-2 rounded-md text-base font-medium transition" data-page="about">About Us</a>
+                <a href="#contacts" onclick="showPage('contacts')" class="nav-link text-medium-text hover:bg-marine-blue/20 hover:text-light-text block px-3 py-2 rounded-md text-base font-medium transition" data-page="contacts">Contacts</a>
+            </div>
+        </div>
+    </nav>
+    
+    <main class="py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <section id="home" class="page-section hidden">
+                <div class="text-center mb-12">
+                    <h1 class="text-5xl font-extrabold text-marine-blue mb-4">Welcome to MUGOODA FAMILY</h1>
+                    <p class="text-xl text-slate-600 max-w-4xl mx-auto">The digital heart of the Mugooda Family—connecting generations and archiving our heritage.</p>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8 mb-12">
+                    <div class="bg-card-photos p-6 rounded-xl shadow-2xl border-t-4 border-marine-blue hover:shadow-marine-blue/30 transition duration-300 transform hover:-translate-y-1">
+                        <h2 class="text-2xl font-bold text-marine-blue mb-3 flex items-center">
+                            <span class="mr-2 text-3xl">🎯</span> Our Mission
+                        </h2>
+                        <p class="text-slate-600">
+                            To **foster unity and connection** among all Mugooda family branches globally, providing a centralized and accessible platform for sharing memories, news, and history.
+                        </p><br>
+                        <p class="text-slate-600">
+                            To create a space for where our family can reach each other for legacy to continue.
+                        </p>
+                    </div>
+
+                    <div class="bg-card-photos p-6 rounded-xl shadow-2xl border-t-4 border-coral-accent hover:shadow-coral-accent/30 transition duration-300 transform hover:-translate-y-1">
+                        <h2 class="text-2xl font-bold text-coral-accent mb-3 flex items-center">
+                            <span class="mr-2 text-3xl">✨</span> Our Vision
+                        </h2>
+                        <p class="text-slate-600">
+                            To be a **lasting digital archive** and dynamic hub that preserves the Mugooda family legacy, educates younger generations on their roots, and inspires future collaboration.
+                        </p>
+                    </div>
+
+                    <div class="bg-card-photos p-6 rounded-xl shadow-2xl border-t-4 border-amber-500 hover:shadow-amber-500/30 transition duration-300 transform hover:-translate-y-1">
+                        <h2 class="text-2xl font-bold text-amber-500 mb-3 flex items-center">
+                            <span class="mr-2 text-3xl">📈</span> Our Objectives
+                        </h2>
+                        <ul class="list-disc list-inside text-slate-600 space-y-1">
+                            <li>Centralize family photos and history.</li>
+                            <li>Maintain an accurate events calendar.</li>
+                            <li>Provide tools for inter-family communication.</li>
+                            <li>Promote youth engagement and development.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-slate-800 border-b-2 border-marine-blue/20 inline-block pb-1 mb-6">Quick Links</h2>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-card-photos p-6 rounded-xl shadow-lg border-l-4 border-marine-blue hover:bg-marine-blue/5 transition duration-300 transform hover:scale-[1.02]">
+                        <h2 class="text-xl font-bold text-slate-800 mb-3">📸 Family Galleries</h2>
+                        <p class="text-slate-600 mb-4 text-sm">Browse photos from all the major family branches and contribute your own memories.</p>
+                        <button onclick="showPage('photos')" class="px-4 py-2 bg-marine-blue text-white font-semibold rounded-full text-sm hover:bg-marine-blue/90 transition">
+                            View All Photos
+                        </button>
+                    </div>
+
+                    <div class="bg-card-photos p-6 rounded-xl shadow-lg border-l-4 border-coral-accent hover:bg-coral-accent/5 transition duration-300 transform hover:scale-[1.02]">
+                        <h2 class="text-xl font-bold text-slate-800 mb-3">📅 Upcoming Events</h2>
+                        <p class="text-slate-600 mb-4 text-sm">Stay updated on birthdays, anniversaries, and official family meetings.</p>
+                        <button onclick="showPage('calendar')" class="px-4 py-2 bg-coral-accent text-white font-semibold rounded-full text-sm hover:bg-coral-accent/90 transition">
+                            See Calendar
+                        </button>
+                    </div>
+
+                    <div class="bg-card-photos p-6 rounded-xl shadow-lg border-l-4 border-amber-500 hover:bg-amber-500/5 transition duration-300 transform hover:scale-[1.02]">
+                        <h2 class="text-xl font-bold text-slate-800 mb-3">🧑‍🎓 Future Generations</h2>
+                        <p class="text-slate-600 mb-4 text-sm">Connect our young ones, archive their content, and build a lasting legacy.</p>
+                        <button onclick="showPage('future-generations-details')" class="px-4 py-2 bg-amber-500 text-white font-semibold rounded-full text-sm hover:bg-amber-600 transition">
+                            Explore Portal
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="photos" class="page-section hidden">
+                <h1 class="text-4xl font-extrabold text-marine-blue mb-8 border-b pb-4">🏠 Mugooda Family Branches</h1>
+                <p class="text-lg text-slate-600 mb-6">Select a family branch to view their photo gallery and contribute your own memories.</p>
+                
+                <div class="mb-10">
+                    <label for="family-filter" class="block text-lg font-medium text-slate-700 mb-2">Filter by Family Branch Name:</label>
+                    <input type="text" 
+                           id="family-filter" 
+                           placeholder="e.g.,Gerald, Tim Leader..." 
+                           onkeyup="filterFamilyCards()"
+                           class="w-full p-3 border border-marine-blue/30 rounded-lg focus:ring-marine-blue focus:border-marine-blue transition shadow-md">
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <script>
+                        // Function to render the family cards on the photos page (Modified to accept optional filter)
+                        function renderFamilyCards(filterText = '') {
+                            const container = document.getElementById('family-cards-container');
+                            if (!container) return;
+                            container.innerHTML = '';
+                            
+                            const normalizedFilter = filterText.toLowerCase().trim();
+                            let found = false;
+
+                            Object.keys(familyData).forEach(familyName => {
+                                const family = familyData[familyName];
+                                
+                                // --- Filtering Logic ---
+                                if (normalizedFilter && !familyName.toLowerCase().includes(normalizedFilter)) {
+                                    return; // Skip this card if it doesn't match the filter
+                                }
+                                // -----------------------
+
+                                found = true;
+                                const totalImages = family.images.length + (family.url ? 1 : 0);
+                                container.innerHTML += `
+                                    <div class="bg-card-photos rounded-xl shadow-lg overflow-hidden group border-t-4 border-marine-blue/50 transition duration-300 hover:shadow-xl">
+                                        <img src="${family.url}" alt="${familyName}" class="w-full h-48 object-cover transition duration-500 group-hover:scale-105">
+                                        <div class="p-4 flex flex-col items-start">
+                                            <h3 class="text-xl font-bold text-slate-800 mb-2">${familyName}</h3>
+                                            <p class="text-sm text-slate-500 mb-3">${totalImages} shared item(s).</p>
+                                            <div class="flex space-x-3">
+                                                <button onclick="handleViewGallery('${familyName}')" class="px-4 py-1.5 bg-marine-blue text-white text-sm font-semibold rounded-full hover:bg-marine-blue/90 transition">
+                                                    View Gallery
+                                                </button>
+                                                <button onclick="openUploadModal('${familyName}')" class="px-4 py-1.5 bg-coral-accent text-white text-sm font-semibold rounded-full hover:bg-coral-accent/90 transition">
+                                                    Post Picture
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `;
+                            });
+                            
+                            // Add a message if no families match the filter
+                            if (!found) {
+                                container.innerHTML = `
+                                    <div class="col-span-full p-8 bg-coral-accent/5 rounded-xl flex items-center justify-center border-2 border-dashed border-coral-accent/30 text-coral-accent/80">
+                                        <p class="text-xl text-center">No family branch found matching "${filterText}". Try a different name.</p>
+                                    </div>
+                                `;
+                            }
+                        }
+                        
+                        /**
+                         * Handles the input from the filter bar and calls renderFamilyCards.
+                         */
+                        function filterFamilyCards() {
+                            const filterText = document.getElementById('family-filter').value;
+                            renderFamilyCards(filterText);
+                        }
+                    </script>
+                    <div id="family-cards-container" class="col-span-full grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        </div>
+                </div>
+            </section>
+
+            <section id="videos" class="page-section hidden">
+                <h1 class="text-4xl font-extrabold text-coral-accent mb-8 border-b pb-4">🎥 Family Video Archive</h1>
+                <p class="text-lg text-slate-600 mb-8">Relive moments, ceremonies, and milestones. Click a video to view and share comments!</p>
+
+                <div class="grid lg:grid-cols-3 gap-8 mb-10">
+                    <div class="lg:col-span-1 bg-card-photos p-6 rounded-xl shadow-2xl border-t-4 border-coral-accent/70">
+                        <h2 class="text-2xl font-bold text-coral-accent mb-4">Submit a Family Video</h2>
+                        <form onsubmit="event.preventDefault(); handleVideoSubmission(this)">
+                            <div class="mb-4">
+                                <label for="video-title" class="block text-sm font-medium text-slate-700 mb-1">Video Title</label>
+                                <input type="text" id="video-title" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-coral-accent focus:border-coral-accent transition">
+                            </div>
+                            <div class="mb-4">
+                                <label for="video-url" class="block text-sm font-medium text-slate-700 mb-1">YouTube/Vimeo Embed URL</label>
+                                <input type="url" id="video-url" required placeholder="https://youtu.be/..." class="w-full p-2 border border-gray-300 rounded-lg focus:ring-coral-accent focus:border-coral-accent transition">
+                            </div>
+                            <div class="mb-6">
+                                <label for="video-uploader-name" class="block text-sm font-medium text-slate-700 mb-1">Your Name</label>
+                                <input type="text" id="video-uploader-name" required value="${currentUser}" class="w-full p-2 border border-gray-300 rounded-lg focus:ring-coral-accent focus:border-coral-accent transition">
+                            </div>
+                            <button type="submit" class="w-full px-4 py-2 bg-coral-accent text-white font-semibold rounded-lg hover:bg-coral-accent/90 transition">
+                                Add Video Link
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="lg:col-span-2">
+                        <h2 class="text-2xl font-bold text-slate-800 mb-4">Latest Videos</h2>
+                        <div id="videos-container" class="grid sm:grid-cols-2 gap-6">
+                            </div>
+                    </div>
+                </div>
+            </section>
+            <section id="saved-images" class="page-section hidden">
+                <h1 class="text-4xl font-extrabold text-marine-blue mb-8 border-b pb-4">⭐ My Saved Images</h1>
+                <p class="text-lg text-slate-600 mb-10">Viewing photos saved by **<span class="text-coral-accent font-bold">${currentUser}</span>**. This list includes all photos you have posted or manually saved.</p>
+                
+                <div id="saved-images-container" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    </div>
+            </section>
+
+            <section id="announcements" class="page-section hidden">
+                <h1 class="text-4xl font-extrabold text-marine-blue mb-8 border-b pb-4">📢 Family Announcements</h1>
+                <p class="text-lg text-slate-600 mb-8">Share important news, prayer requests, or upcoming events that require immediate attention.</p>
+
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-1 bg-card-photos p-6 rounded-xl shadow-2xl border border-marine-blue/30">
+                        <h2 class="text-2xl font-bold text-marine-blue mb-4">Post a New Announcement</h2>
+                        <form onsubmit="event.preventDefault(); handleAnnouncementSubmission(this)">
+                            <div class="mb-4">
+                                <label for="announcement-title" class="block text-sm font-medium text-slate-700 mb-1">Title (e.g., Prayer Request, Urgent Update)</label>
+                                <input type="text" id="announcement-title" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-marine-blue focus:border-marine-blue transition">
+                            </div>
+                            <div class="mb-6">
+                                <label for="announcement-details" class="block text-sm font-medium text-slate-700 mb-1">Details (Full message)</label>
+                                <textarea id="announcement-details" rows="4" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-marine-blue focus:border-marine-blue transition"></textarea>
+                            </div>
+                            <button type="submit" class="w-full px-4 py-2 bg-marine-blue text-white font-semibold rounded-lg hover:bg-marine-blue/90 transition">
+                                Post Instantly
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="lg:col-span-2">
+                        <h2 class="text-2xl font-bold text-slate-800 mb-4">Latest Posts (Instant)</h2>
+                        <div id="recent-announcement-submissions" class="space-y-4">
+                            </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="calendar" class="page-section hidden">
+                <h1 class="text-4xl font-extrabold text-marine-blue mb-8 border-b pb-4">🗓️ Family Calendar & Events</h1>
+                
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-2 bg-card-photos p-6 rounded-xl shadow-2xl">
+                        <div class="flex justify-between items-center mb-6">
+                            <button onclick="changeMonth(-1)" class="p-2 text-marine-blue hover:text-marine-blue/70 transition">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                            </button>
+                            <h2 id="current-month-year" class="text-3xl font-extrabold text-slate-800">November 2025</h2>
+                            <button onclick="changeMonth(1)" class="p-2 text-marine-blue hover:text-marine-blue/70 transition">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                        
+                        <div class="grid grid-cols-7 text-center text-sm font-bold text-slate-500 mb-2 border-b pb-2">
+                            <span>Sun</span>
+                            <span>Mon</span>
+                            <span>Tue</span>
+                            <span>Wed</span>
+                            <span>Thu</span>
+                            <span>Fri</span>
+                            <span>Sat</span>
+                        </div>
+                        
+                        <div id="calendar-grid" class="grid grid-cols-7 gap-1">
+                            </div>
+                    </div>
+
+                    <div class="lg:col-span-1 space-y-8">
+                        <div class="bg-marine-blue/10 p-6 rounded-xl shadow-inner border border-marine-blue/30">
+                            <h3 class="text-2xl font-bold text-marine-blue mb-4">Events for This Month</h3>
+                            <ul id="event-list" class="space-y-3">
+                                </ul>
+                            <p id="no-events-message" class="text-lg text-slate-500 italic mt-4 hidden">No pre-scheduled events this month.</p>
+                        </div>
+
+                        <div class="bg-card-photos p-6 rounded-xl shadow-2xl border border-coral-accent/30">
+                            <h3 class="text-2xl font-bold text-coral-accent mb-4">Submit a New Event</h3>
+                            <form onsubmit="event.preventDefault(); handleCalendarSubmission(this)">
+                                <div class="mb-4">
+                                    <label for="event-name" class="block text-sm font-medium text-slate-700 mb-1">Event Name</label>
+                                    <input type="text" id="event-name" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-coral-accent focus:border-coral-accent transition">
+                                </div>
+                                <div class="mb-4">
+                                    <label for="event-date" class="block text-sm font-medium text-slate-700 mb-1">Date</label>
+                                    <input type="date" id="event-date" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-coral-accent focus:border-coral-accent transition">
+                                </div>
+                                <div class="mb-6">
+                                    <label for="event-description" class="block text-sm font-medium text-slate-700 mb-1">Description (Optional)</label>
+                                    <textarea id="event-description" rows="2" class="w-full p-2 border border-gray-300 rounded-lg focus:ring-coral-accent focus:border-coral-accent transition"></textarea>
+                                </div>
+                                <button type="submit" class="w-full px-4 py-2 bg-coral-accent text-white font-semibold rounded-lg hover:bg-coral-accent/90 transition">
+                                    Add Event to Calendar
+                                </button>
+                            </form>
+                        </div>
+                        
+                        <div class="bg-card-photos p-6 rounded-xl shadow border border-marine-blue/30">
+                             <h4 class="text-xl font-bold text-marine-blue mb-3">Your Recent Submissions</h4>
+                             <div id="recent-calendar-submissions" class="space-y-3">
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="about" class="page-section hidden">
+                <h1 class="text-4xl font-extrabold text-marine-blue mb-8 border-b pb-4">📚 Our Family Legacy: About Us</h1>
+                <p class="text-xl text-slate-600 mb-10">Explore the different facets of our family, from our historical roots to our commitment to the next generation.</p>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-card-photos p-6 rounded-xl shadow-xl border-t-4 border-marine-blue transition hover:shadow-2xl cursor-pointer" onclick="showPage('our-heritage-details')">
+                        <h2 class="text-2xl font-bold text-marine-blue mb-2">📜 Our Heritage</h2>
+                        <p class="text-slate-600">Discover the history of the Mugooda lineage, traditions, and core values that bind us together.</p>
+                    </div>
+
+                    <div class="bg-card-photos p-6 rounded-xl shadow-xl border-t-4 border-coral-accent transition hover:shadow-2xl cursor-pointer" onclick="showPage('community-support-details')">
+                        <h2 class="text-2xl font-bold text-coral-accent mb-2">🤝 Community Support</h2>
+                        <p class="text-slate-600">Learn about our collective efforts to support our local communities and charitable causes.</p>
+                    </div>
+
+                    <div class="bg-card-photos p-6 rounded-xl shadow-xl border-t-4 border-amber-500 transition hover:shadow-2xl cursor-pointer" onclick="showPage('future-generations-details')">
+                        <h2 class="text-2xl font-bold text-amber-500 mb-2">🌱 Future Generations for the young Mugoodas</h2>
+                        <p class="text-slate-600">A special section dedicated to registering our youth and archiving their creative content.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="contacts" class="page-section hidden">
+                <h1 class="text-4xl font-extrabold text-marine-blue mb-8 border-b pb-4">📞 Contact & Communication</h1>
+                <div class="grid md:grid-cols-2 gap-8 bg-card-photos p-8 rounded-xl shadow-2xl">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800 mb-4">Elders Council Contacts</h2>
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-marine-blue/70 pl-4 py-2">
+                                <p class="text-lg font-semibold text-slate-700">Chief Elder (Main Point of Contact)</p>
+                                <p class="text-slate-600">Email: <a href="mailto:chief.elder@mugoodafamily.org" class="text-marine-blue hover:underline">chief.elder@mugoodafamily.org</a></p>
+                               <p class="text-slate-600">Phone: 0771475512/0701188563</p>
+                            </div>
+                            <div class="border-l-4 border-coral-accent/70 pl-4 py-2">
+                                <p class="text-lg font-semibold text-slate-700">Youth Portal Administrator</p>
+                                <p class="text-slate-600">Email: <a href="mailto:youth.admin@mugoodafamily.org" class="text-coral-accent hover:underline">youth.timleader46@gmail.com</a></p>
+                                 <p class="text-slate-600">Phone: 0771475512/0701188563</p>
+                            </div>
+                            <div class="border-l-4 border-amber-500/70 pl-4 py-2">
+                                <p class="text-lg font-semibold text-slate-700">Family Historian (Heritage & Archives)</p>
+                                <p class="text-slate-600">Email: <a href="mailto:historian@mugoodafamily.org" class="text-amber-500 hover:underline">historian@mugoodafamily.org</a></p>
+                              <p class="text-slate-600">Phone: 0771475512/0701188563</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800 mb-4">General Inquiry Form</h2>
+                        <form onsubmit="event.preventDefault(); showMessageModal('Message Sent!', 'Thank you for your message. We will respond to your general inquiry shortly.')" class="space-y-4">
+                            <div>
+                                <label for="contact-name" class="block text-sm font-medium text-slate-700">Your Name</label>
+                                <input type="text" id="contact-name" required class="w-full p-2 border border-gray-300 rounded-lg">
+                            </div>
+                            <div>
+                                <label for="contact-email" class="block text-sm font-medium text-slate-700">Your Email</label>
+                                <input type="email" id="contact-email" required class="w-full p-2 border border-gray-300 rounded-lg">
+                            </div>
+                            <div>
+                                <label for="contact-message" class="block text-sm font-medium text-slate-700">Message</label>
+                                <textarea id="contact-message" rows="4" required class="w-full p-2 border border-gray-300 rounded-lg"></textarea>
+                            </div>
+                            <button type="submit" class="w-full px-4 py-2 bg-marine-blue text-white font-semibold rounded-lg hover:bg-marine-blue/90 transition">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <section id="family-gallery-view" class="page-section hidden">
+                <button onclick="showPage('photos')" class="text-marine-blue font-medium mb-4 flex items-center hover:underline">
+                    &larr; Back to All Families
+                </button>
+                <h1 id="gallery-header" class="text-4xl font-extrabold text-slate-800 mb-4">Gallery Name</h1>
+                <p id="gallery-status" class="text-lg text-slate-600 mb-6">Viewing Initial Image.</p>
+                <button id="gallery-post-button" class="px-6 py-2 bg-coral-accent text-white font-semibold rounded-full hover:bg-coral-accent/90 transition mb-8">
+                    Post a New Picture
+                </button>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <img id="family-initial-image" src="" alt="Family Initial Image" class="hidden"> 
+                    
+                    <div id="family-images-container" class="col-span-3 grid grid-cols-1 md:grid-cols-3 gap-6">
+                        </div>
+                </div>
+            </section>
+            
+            <section id="our-heritage-details" class="page-section hidden">
+                <button onclick="showPage('about')" class="text-marine-blue font-medium mb-4 flex items-center hover:underline">
+                    &larr; Back to About Us Hub
+                </button>
+                <h1 class="text-4xl font-extrabold text-marine-blue mb-6">📜 Our Heritage and Values</h1>
+                <div class="bg-card-photos p-8 rounded-xl shadow-2xl space-y-6">
+                    <p class="text-lg text-slate-700">
+                        The Mugooda family traces its roots back many generations, originating from the region of [Simulated Region]. Our heritage is built on the pillars of **Unity, Faith, and Resilience**. 
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 text-slate-700 ml-4">
+                        <li>**Unity (Obumu):** We believe that our greatest strength lies in our connection and mutual support.</li>
+                        <li>**Faith (Okukkiriza):** A deep-seated commitment to our spiritual beliefs guides our moral compass.</li>
+                        <li>**Resilience (Obugumu):** The ability to overcome adversity has been a defining trait of our family throughout history.</li>
+                    </ul>
+                    <p class="text-base text-slate-700 italic border-l-4 border-marine-blue/50 pl-4 py-2">
+                        This digital archive is dedicated to preserving our stories, artifacts, and oral traditions for every generation to come.
+                    </p>
+                </div>
+            </section>
+
+            <section id="community-support-details" class="page-section hidden">
+                <button onclick="showPage('about')" class="text-marine-blue font-medium mb-4 flex items-center hover:underline">
+                    &larr; Back to About Us Hub
+                </button>
+                <h1 class="text-4xl font-extrabold text-coral-accent mb-6">🤝 Community Support Initiatives</h1>
+                <div class="bg-card-photos p-8 rounded-xl shadow-2xl space-y-6">
+                    <p class="text-lg text-slate-700">
+                        As a family, we are committed to giving back to the communities that have nurtured us. Our collective efforts focus on **education and welfare**.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="p-4 border border-coral-accent/50 rounded-lg">
+                            <h3 class="font-bold text-xl text-coral-accent mb-2">The Mugooda Scholarship Fund</h3>
+                            <p class="text-slate-600 text-sm">Providing grants and resources for young family members and local youth pursuing higher education.</p>
+                        </div>
+                        <div class="p-4 border border-coral-accent/50 rounded-lg">
+                            <h3 class="font-bold text-xl text-coral-accent mb-2">Annual Outreach Day</h3>
+                            <p class="text-slate-600 text-sm">A dedicated day where all family members volunteer for local clean-up, donation, and mentoring programs.</p>
+                        </div>
+                    </div>
+                    <p class="text-base text-slate-700 italic border-l-4 border-coral-accent/50 pl-4 py-2">
+                        To contribute or suggest a new initiative, please contact the Elders Council via the **Contacts** page.
+                    </p>
+                </div>
+            </section>
+
+            <section id="future-generations-details" class="page-section hidden">
+                <button onclick="showPage('about')" class="text-marine-blue font-medium mb-4 flex items-center hover:underline">
+                    &larr; Back to About Us Hub
+                </button>
+                <h1 class="text-4xl font-extrabold text-amber-500 mb-6">🌱 Future Generations </h1>
+                <p class="text-lg text-slate-600 mb-8">This space is for our young family members (under 40) to register, share their thoughts, and showcase their talents.</p>
+
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-1 bg-card-photos p-6 rounded-xl shadow-2xl border-t-4 border-amber-500">
+                        <h2 class="text-2xl font-bold text-amber-500 mb-4">1. Register as a Young Mugooda</h2>
+                        <form id="young-mugooda-registration-form" onsubmit="event.preventDefault(); handleMugoodaRegistration()">
+                            <div class="mb-4">
+                                <label for="first-name" class="block text-sm font-medium text-slate-700 mb-1">Surname Name</label>
+                                <input type="text" id="first-name" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-amber-500 focus:border-amber-500 transition">
+                            </div>
+                            <div class="mb-6">
+                                <label for="Second-name" class="block text-sm font-medium text-slate-700 mb-1">Second-Name (e.g., Gerald)</label>
+                                <input type="text" id="family-name" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-amber-500 focus:border-amber-500 transition">
+                            </div>
+                            <button type="submit" class="w-full px-4 py-2 bg-amber-500 text-white font-semibold rounded-lg hover:bg-amber-600 transition">
+                                Complete Registration
+                            </button>
+                        </form>
+                        <div class="mt-6 text-center">
+                            <button onclick="showPage('registered-youth-list')" class="text-marine-blue font-medium hover:underline text-sm">
+                                View Registered Youth List &rarr;
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:col-span-2 bg-card-photos p-6 rounded-xl shadow-2xl border-l-4 border-coral-accent/50">
+                        <h2 class="text-2xl font-bold text-coral-accent mb-4">2. Submit Your Content (Stories, Art, Ideas)</h2>
+                        <form id="content-submission" onsubmit="event.preventDefault(); handleSubmitContent()">
+                            <div class="grid md:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label for="submit-name" class="block text-sm font-medium text-slate-700 mb-1">Your Full Registered Name</label>
+                                    <input type="text" id="submit-name" required placeholder="Must match registration" class="w-full p-2 border border-gray-300 rounded-lg">
+                                </div>
+                                <div>
+                                    <label for="content-title" class="block text-sm font-medium text-slate-700 mb-1">Title of Content</label>
+                                    <input type="text" id="content-title" required class="w-full p-2 border border-gray-300 rounded-lg">
+                                </div>
+                            </div>
+                            <div class="mb-6">
+                                <label for="content-text" class="block text-sm font-medium text-slate-700 mb-1">Your Story, Poem, or Idea</label>
+                                <textarea id="content-text" rows="6" required class="w-full p-2 border border-gray-300 rounded-lg"></textarea>
+                            </div>
+                            <button type="submit" class="w-full px-4 py-2 bg-coral-accent text-white font-semibold rounded-lg hover:bg-coral-accent/90 transition">
+                                Submit for Archive
+                            </button>
+                        </form>
+                        <div class="mt-6 text-center">
+                            <button onclick="showPage('content-archive')" class="text-marine-blue font-medium hover:underline text-sm">
+                                View Published Youth Content Archive &rarr;
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:col-span-3">
+                         <h2 class="text-2xl font-bold text-slate-800 mb-4 mt-6">Your Recent Submissions (Pending Review)</h2>
+                         <div id="recent-submissions-container" class="space-y-4">
+                             </div>
+                    </div>
+
+                </div>
+            </section>
+            
+            <section id="registered-youth-list" class="page-section hidden">
+                <button onclick="showPage('future-generations-details')" class="text-marine-blue font-medium mb-4 flex items-center hover:underline">
+                    &larr; Back to Future Generations Portal
+                </button>
+                <h1 class="text-4xl font-extrabold text-amber-500 mb-6">🧑‍🎓 Registered Young Mugoodas</h1>
+                <p class="text-lg text-slate-600 mb-8">A growing list of the young family members who have officially registered with the portal.</p>
+                
+                <div id="registered-youth-container" class="space-y-3 p-6 bg-amber-50 rounded-xl shadow-inner border border-amber-200">
+                    </div>
+            </section>
+            
+            <section id="content-archive" class="page-section hidden">
+                <button onclick="showPage('future-generations-details')" class="text-marine-blue font-medium mb-4 flex items-center hover:underline">
+                    &larr; Back to Future Generations Portal
+                </button>
+                <h1 class="text-4xl font-extrabold text-coral-accent mb-6">📝 Youth Content Archive</h1>
+                <p class="text-lg text-slate-600 mb-8">Published works (stories, poems, art descriptions, research) submitted by the registered youth.</p>
+                
+                <div id="content-archive-container" class="space-y-8">
+                    </div>
+            </section>
+
+        </div>
+    </main>
+    
+    <div id="lightbox-modal" class="fixed inset-0 bg-black bg-opacity-90 hidden items-center justify-center z-[60] transition-opacity duration-300" onclick="closeLightbox()">
+        <div class="relative max-w-full max-h-full p-4" onclick="event.stopPropagation()">
+            <img id="lightbox-image" src="" alt="Full size photo" class="max-w-full max-h-[90vh] object-contain transition-transform duration-300">
+            
+            <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white text-4xl font-light hover:text-coral-accent transition z-10 p-2 leading-none">
+                &times; 
+            </button>
+            
+            <button id="prev-image-btn" onclick="showPreviousImage(event)" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white p-3 bg-black/50 rounded-full hover:bg-black/80 transition disabled:opacity-30 disabled:cursor-not-allowed z-20">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+            </button>
+
+            <button id="next-image-btn" onclick="showNextImage(event)" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white p-3 bg-black/50 rounded-full hover:bg-black/80 transition disabled:opacity-30 disabled:cursor-not-allowed z-20">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </button>
+
+            <div class="absolute bottom-0 left-0 right-0 p-4 bg-black bg-opacity-50 text-white flex justify-between items-center z-10">
+                <p id="lightbox-uploader" class="text-sm italic"></p>
+                <div class="flex space-x-3">
+                    <button id="save-image-btn" onclick="saveImage()" class="px-3 py-1 bg-marine-blue text-white font-semibold rounded-full text-sm hover:bg-marine-blue/90 transition flex items-center">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Save
+                    </button>
+                    <button id="delete-image-btn" onclick="deleteImage()" class="px-3 py-1 bg-red-600 text-white font-semibold rounded-full text-sm hover:bg-red-700 transition hidden flex items-center">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="video-modal" class="fixed inset-0 bg-black bg-opacity-90 hidden items-center justify-center z-[60] transition-opacity duration-300" onclick="closeVideoModal()">
+        <div class="relative max-w-4xl w-full max-h-full p-6 bg-card-photos rounded-xl shadow-2xl overflow-y-auto" onclick="event.stopPropagation()" id="video-modal-content">
+            <button onclick="closeVideoModal()" class="absolute top-4 right-4 text-slate-800 text-4xl font-light hover:text-coral-accent transition z-10 p-2 leading-none">
+                &times; 
+            </button>
+
+            <div class="grid lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2">
+                    <div id="video-player-container" class="aspect-w-16 aspect-h-9 mb-4">
+                        </div>
+                    <h2 id="video-title-display" class="text-3xl font-extrabold text-marine-blue mb-2">Video Title</h2>
+                    <p id="video-info-display" class="text-sm text-slate-500 mb-6">Uploader: Name | Date: Date</p>
+
+                    <div class="mt-8">
+                        <h3 class="text-xl font-bold text-slate-800 mb-3">Leave a Comment</h3>
+                        <form onsubmit="event.preventDefault(); handleVideoComment(this)">
+                            <input type="hidden" id="modal-video-id">
+                            <textarea id="comment-text" rows="3" required placeholder="Share your thoughts on this memory..." class="w-full p-2 border border-gray-300 rounded-lg focus:ring-coral-accent focus:border-coral-accent transition mb-3"></textarea>
+                            <button type="submit" class="px-4 py-2 bg-coral-accent text-white font-semibold rounded-lg hover:bg-coral-accent/90 transition">
+                                Post Comment
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="lg:col-span-1 border-l pl-4 border-gray-200">
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Comments (<span id="comment-count">0</span>)</h3>
+                    <div id="video-comments-container" class="space-y-4 max-h-96 overflow-y-auto">
+                        <p class="text-slate-500 italic">No comments yet. Be the first!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="message-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 transition-opacity duration-300">
+        <div class="bg-card-photos p-8 rounded-xl shadow-2xl max-w-sm w-full text-center transform transition-all duration-300 scale-95 opacity-0 border border-marine-blue/30" id="modal-content">
+            <h3 id="modal-title" class="text-2xl font-bold text-marine-blue mb-4"></h3>
+            <p id="modal-message" class="text-slate-700 mb-6"></p>
+            <button onclick="closeMessageModal()" class="px-6 py-2 bg-marine-blue text-white font-semibold rounded-full hover:bg-marine-blue/90 transition">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <div id="upload-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 transition-opacity duration-300">
+        <div class="bg-card-photos p-8 rounded-xl shadow-2xl max-w-lg w-full transform transition-all duration-300 scale-95 opacity-0 border border-marine-blue/30" id="upload-modal-content">
+            <h3 class="text-2xl font-bold text-marine-blue mb-4">Post Picture for <span id="family-name-upload" class="text-coral-accent"></span></h3>
+            <p class="text-slate-700 mb-6">Select an image to post to this family's profile. **(This is a simulated instant upload)**</p>
+            
+            <form onsubmit="event.preventDefault(); handleUpload(document.getElementById('family-id').value)">
+                <input type="hidden" id="family-id" value="">
+                
+                <div class="mb-6">
+                    <label for="image-upload" class="block text-sm font-medium text-slate-700 mb-2">Image File</label>
+                    <input type="file" id="image-upload" name="image-upload" accept="image/*" required class="block w-full text-sm text-slate-600 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-marine-blue/20 file:text-marine-blue hover:file:bg-marine-blue/30 transition duration-150">
+                </div>
+                
+                <div class="flex justify-end space-x-4">
+                    <button type="button" onclick="closeUploadModal()" class="px-4 py-2 text-slate-700 border border-coral-accent/40 rounded-lg hover:bg-coral-accent/10 transition">Cancel</button>
+                    <button type="submit" class="px-6 py-2 bg-coral-accent text-white font-semibold rounded-lg shadow-lg hover:bg-coral-accent/90 transition">
+                        Upload Image
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="bg-dark-slate mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-medium-text">
+            <p>&copy; <span id="current-year">2025</span> MUGOODAfamily. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Global arrays to simulate storing data
+        const registeredYouth = []; 
+        const youthContentArchive = []; 
+        const recentSubmissions = []; 
+        const recentCalendarSubmissions = []; 
+        const recentAnnouncementSubmissions = []; 
+        
+        // Global variable for calendar state
+        let currentCalendarDate = new Date(); 
+
+        // All page IDs for dynamic navigation (UPDATED with 'videos')
+        const pages = ['home', 'photos', 'videos', 'saved-images', 'about', 'contacts', 'announcements', 'calendar', 'family-gallery-view', 'our-heritage-details', 'community-support-details', 'future-generations-details', 'registered-youth-list', 'content-submission', 'content-archive']; 
+        
+        // DOM element references
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const messageModal = document.getElementById('message-modal');
+        const modalContent = document.getElementById('modal-content');
+        const modalTitle = document.getElementById('modal-title');
+        const modalMessage = document.getElementById('modal-message');
+
+        const uploadModal = document.getElementById('upload-modal');
+        const uploadModalContent = document.getElementById('upload-modal-content');
+        const familyNameDisplay = document.getElementById('family-name-upload');
+        const familyIdInput = document.getElementById('family-id');
+        
+        const galleryHeader = document.getElementById('gallery-header');
+        const galleryPostButton = document.getElementById('gallery-post-button'); 
+        const familyInitialImage = document.getElementById('family-initial-image');
+        const familyImagesContainer = document.getElementById('family-images-container');
+        
+        const registeredYouthContainer = document.getElementById('registered-youth-container');
+        const contentArchiveContainer = document.getElementById('content-archive-container');
+        
+        // New DOM reference
+        const savedImagesContainer = document.getElementById('saved-images-container');
+
+        // New DOM references for the Lightbox
+        const lightboxModal = document.getElementById('lightbox-modal');
+        const lightboxImage = document.getElementById('lightbox-image');
+        
+        // New Lightbox Action DOM references
+        const saveImageBtn = document.getElementById('save-image-btn');
+        const deleteImageBtn = document.getElementById('delete-image-btn');
+        const lightboxUploader = document.getElementById('lightbox-uploader');
+        const prevImageBtn = document.getElementById('prev-image-btn'); 
+        const nextImageBtn = document.getElementById('next-image-btn'); 
+        
+        // NEW VIDEO MODAL DOM REFERENCES
+        const videoModal = document.getElementById('video-modal');
+        const videoModalContent = document.getElementById('video-modal-content');
+        const videoPlayerContainer = document.getElementById('video-player-container');
+        const videoTitleDisplay = document.getElementById('video-title-display');
+        const videoInfoDisplay = document.getElementById('video-info-display');
+        const videoCommentsContainer = document.getElementById('video-comments-container');
+        const commentCountDisplay = document.getElementById('comment-count');
+        const modalVideoIdInput = document.getElementById('modal-video-id');
+
+        // --- New Global Variables for Simulation ---
+        const currentUser = 'Gerald'; // Simulating the currently logged-in user
+        const adminUser = 'Mugooda Admin'; // Simulating an administrator user
+        
+        // Stores an array of image IDs saved by the current user. 
+        const userSaves = {
+            'Gerald': [], 
+            'Mugooda Admin': ['C_001'] 
+        };
+
+        // Global state for the currently viewed image in the lightbox
+        let currentLightboxImage = {
+            family: null,
+            id: null,
+            uploader: null,
+            url: null,
+            isProfile: false 
+        };
+
+        // NEW: Global state for lightbox scrolling
+        let currentFamilyImages = []; // Array of image objects for the current family's gallery
+        let currentImageIndex = -1; // Index of the image currently being viewed
+
+        // Family data structure (MODIFIED to include uploader and unique ID)
+        const familyData = {
+            'CEASER FAMILY': { 
+                url: "https://assets-c4c042d3-1d67-4632-8418-4d6b67773295.s3.amazonaws.com/CEASER_FAMILY_A_diverse_family_of_four_engaged_in_mountain_climbing_at_sunrise._They_are_roped_together_ascending_a_snowy_rocky_peak_above_the_clouds_demonstrating_strength_and_resilience._8k_photorealistic._-_051b9e07-3531-4e78-be7f-85f81f9f238b.png", 
+                images: [
+                    {url: "https://i.imgur.com/GzB04tI.jpeg", uploader: adminUser, id: 'C_001'}, 
+                    {url: "https://i.imgur.com/FwWv5gN.jpeg", uploader: currentUser, id: 'C_002'},
+                    {url: "https://i.imgur.com/2b3Q9Sg.jpeg", uploader: adminUser, id: 'C_003'}
+                ] 
+            },
+            'MUDANYE FAMILY': { 
+                url: "https://assets-c4c042d3-1d67-4632-8418-4d6b67773295.s3.amazonaws.com/MUDANYE_FAMILY_A_joyful_Black_family_with_two_parents_and_three_children_laughing_and_playing_in_a_sunny_field_with_dandelions._The_father_has_one_child_on_his_shoulders_and_the_other_two_are_hugging_their_mother._Golden_hour_lighting._8k_photorealistic._-_f02dd9f0-2527-4a7b-a010-388f62363558.png", 
+                images: [] 
+            },
+            'MUSIMAMI FAMILY': { 
+                url: "https://assets-c4c042d3-1d67-4632-8418-4d6b67773295.s3.amazonaws.com/MUSIMAMI_FAMILY_A_diverse_family_of_three_parents_and_one_child_meditating_together_in_a_serene_Japanese_garden_setting._The_atmosphere_is_peaceful_and_calm_with_a_small_waterfall_in_the_background._Soft_morning_light._8k_photorealistic._-_052f750b-8d05-4c6e-81f1-b92451f2d34a.png", 
+                images: [] 
+            },
+            'SEMPANGI FAMILY': { 
+                url: "https://assets-c4c042d3-1d67-4632-8418-4d6b67773295.s3.amazonaws.com/SEMPANGI_FAMILY_A_multi-generational_Indian_family_sitting_around_a_kitchen_table_laughing_heartily._Sunlight_streams_through_a_window_creating_a_warm_and_inviting_atmosphere._8k_photorealistic._-_2df22c6c-9a4c-473d-9d47-6699d7a22026.png", 
+                images: [] 
+            },
+            'BABIKOBA FAMILY': { 
+                url: "https://assets-c4c042d3-1d67-4632-8418-4d6b67773295.s3.amazonaws.com/BABIKOBA_FAMILY_A_loving_Black_couple_sitting_on_a_sofa_with_their_young_child_between_them._They_are_looking_at_each_other_with_affectionate_smiles_in_a_cozy_living_room_setting._Soft_lighting_creates_a_warm_ambiance._8k_photorealistic._-_f0250d18-77c8-47e1-8884-df919cf62ff8.png", 
+                images: [] 
+            },
+            'BRUNO FAMILY': { 
+                url: "https://assets-c4c042d3-1d67-4632-8418-4d6b67773295.s3.amazonaws.com/BRUNO_FAMILY_A_caring_Asian_mother_and_Caucasian_father_feeding_their_two_young_children_at_a_kitchen_table._The_scene_depicts_gentle_care_and_attention_in_a_bright_home_environment._8k_photorealistic._-_4f7df506-69e3-4c07-b649-1662580ef118.png", 
+                images: [] 
+            },
+            'DOROTHY FAMILY': { 
+                url: "https://assets-c4c042d3-1d67-4632-8418-4d6b67773295.s3.amazonaws.com/DOROTHY_FAMILY_A_multi-generational_family_with_grandparents_parents_and_a_child_all_placing_their_hands_together_in_a_pile_on_a_wooden_table_as_a_symbol_of_unity._A_warm_fireplace_is_in_the_background._8k_photorealistic._-_23d130ed-37c2-40e1-a083-a719d45e5b30.png", 
+                images: [] 
+            },
+            'MONICA FAMILY': { 
+                url: "https://assets-c4c042d3-1d67-4632-8418-4d6b67773295.s3.amazonaws.com/MONICA_FAMILY_A_large_diverse_group_of_people_of_various_ages_and_ethnicities_gathered_in_a_modern_communal_space._They_are_all_interacting_happily_and_inclusively._Daytime_with_natural_light._8k_photorealistic._-_057c0e64-e407-4286-93ed-7517c569f6e9.png", 
+                images: [] 
+            },
+            'PROSSY FAMILY': { 
+                url: "https://assets-c4c042d3-1d67-4632-8418-4d6b67773295.s3.amazonaws.com/PROSSY_FAMILY_A_diverse_family_of_three_generations_praying_together_with_their_hands_clasped_in_a_peaceful_home_setting._Soft_light_highlights_their_expressions_of_reverence_and_hope._8k_photorealistic._-_0c31317d-2b73-41c3-8cc2-005691060447.png", 
+                images: [] 
+            }
+        };
+
+        // NEW: Family Video Data Structure
+        const familyVideos = {
+            'V_001': {
+                title: '2024 Family Reunion Highlights',
+                url: 'https://www.youtube.com/embed/zM7R5q3RzXk?si=1W9D_J-c-g6i1mE5', // Example YT embed
+                uploader: adminUser,
+                date: '2024-08-17',
+                comments: [
+                    { name: 'Monica', text: 'This was the best reunion ever! So happy to see everyone.', time: '1 day ago' },
+                    { name: 'Bruno', text: 'The camera work is fantastic!', time: '1 hour ago' }
+                ]
+            },
+            'V_002': {
+                title: 'Gerald Graduation Ceremony',
+                url: 'https://player.vimeo.com/video/425555620?h=5678b87e91', // Example Vimeo embed
+                uploader: currentUser,
+                date: '2025-05-15',
+                comments: [
+                    { name: 'Prossy', text: 'So proud of you, Gerald!', time: '2 weeks ago' }
+                ]
+            },
+             'V_003': {
+                title: 'Christmas Eve 2023 Skit',
+                url: 'https://www.youtube.com/embed/5T2F0F-s2F8?si=M3g5s2s2d8P5r7A9',
+                uploader: 'Dorothy',
+                date: '2023-12-24',
+                comments: []
+            }
+        };
+
+        // Simulated Events and Birthdays (Year independent for recurring events)
+        const familyEvents = [
+            // Current Month is November 2025
+            { date: '1-15', name: "Founder's Day Celebration", type: 'Event' }, // Jan 15th
+            { date: '2-29', name: "Sarah Mugooda's Birthday", type: 'Birthday' }, // Feb 29th
+            { date: '5-05', name: "Annual Picnic Planning Meeting", type: 'Meeting' }, // May 5th
+            { date: '6-21', name: "Joshua & Maria Anniversary", type: 'Anniversary' }, // June 21st
+            { date: '8-17', name: "Mugooda Family Reunion", type: 'Event' }, // Aug 17th
+            { date: '10-25', name: "Timothy Mugooda's Birthday", type: 'Birthday' }, // Oct 25th
+            { date: '11-08', name: "Quarterly Financial Review", type: 'Meeting' }, // Nov 8th
+            { date: '11-28', name: "US Thanksgiving", type: 'Holiday' }, // Nov 28th
+            { date: '12-24', name: "Family Holiday Dinner", type: 'Event' }, // Dec 24th
+        ];
+        
+        // --- START UI & Navigation Functions ---
+        
+        /**
+         * Shows the specified page section and updates the navigation link active state.
+         * @param {string} pageId The ID of the section to show (e.g., 'home').
+         */
+        function showPage(pageId) {
+            if (!pages.includes(pageId)) {
+                pageId = 'home';
+            }
+            
+            // Ensure the lists are rendered if we are navigating to those pages
+            if (pageId === 'registered-youth-list') {
+                renderRegisteredYouthList();
+            } else if (pageId === 'content-archive') {
+                renderContentArchive();
+            } else if (pageId === 'calendar') {
+                renderCalendar();
+                renderRecentCalendarSubmissions();
+            } else if (pageId === 'announcements') {
+                renderRecentAnnouncementSubmissions();
+            } else if (pageId === 'content-submission') {
+                renderRecentSubmissions(); 
+            } else if (pageId === 'photos') {
+                // Ensure filter input is cleared when going back to the main photos page
+                const filterInput = document.getElementById('family-filter');
+                if (filterInput) filterInput.value = '';
+                renderFamilyCards();
+            } else if (pageId === 'saved-images') {
+                renderSavedImages(); // Render saved images list
+            } else if (pageId === 'videos') {
+                 renderVideosPage(); // NEW: Render video list
+            }
+
+
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.add('hidden');
+                section.style.opacity = '0'; // For transition reset
+            });
+
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.remove('hidden');
+                // Use a short timeout to apply the opacity transition after unhiding
+                setTimeout(() => {
+                    targetPage.style.opacity = '1';
+                }, 10);
+            }
+
+            // Navigation Highlighting Logic
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('bg-marine-blue/20', 'text-light-text', 'font-extrabold', 'text-marine-blue');
+                link.classList.add('text-medium-text');
+
+                let activePage = pageId;
+                if (['family-gallery-view', 'saved-images'].includes(pageId)) {
+                    activePage = pageId;
+                } else if (['our-heritage-details', 'community-support-details', 'future-generations-details', 'registered-youth-list', 'content-submission', 'content-archive'].includes(pageId)) {
+                    activePage = 'about'; 
+                }
+
+                if (link.dataset.page === activePage) {
+                    link.classList.add('font-extrabold');
+                    if (link.classList.contains('p-2')) { // Desktop nav links
+                        link.classList.remove('text-medium-text');
+                        link.classList.add('text-light-text'); 
+                    }
+                    if (link.classList.contains('px-3')) { // Mobile nav links
+                        link.classList.add('bg-marine-blue/20', 'text-light-text');
+                    }
+                }
+            });
+
+            if (window.location.hash !== '#' + pageId) {
+                window.history.pushState(null, null, '#' + pageId);
+            }
+
+            // Hide mobile menu after click
+            mobileMenu.classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        /**
+         * Handles the initial load and hash changes for navigation.
+         */
+        function handleLoadAndHashChange() {
+            const hash = window.location.hash.substring(1);
+            showPage(hash || 'home');
+        }
+
+        /**
+         * Shows the generic message modal.
+         */
+        function showMessageModal(title, message) {
+            modalTitle.innerHTML = title;
+            modalMessage.innerHTML = message;
+            messageModal.classList.remove('hidden');
+            modalContent.classList.remove('scale-95', 'opacity-0');
+            modalContent.classList.add('scale-100', 'opacity-100');
+            messageModal.classList.add('flex', 'opacity-100');
+        }
+
+        /**
+         * Closes the generic message modal.
+         */
+        function closeMessageModal() {
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+
+            setTimeout(() => {
+                messageModal.classList.remove('flex', 'opacity-100');
+                messageModal.classList.add('hidden');
+            }, 300);
+        }
+
+        // --- END UI & Navigation Functions ---
+        
+        // --- START Photos Gallery Functions (Lightbox Integration) ---
+        
+        /**
+         * Generates a unique, simple ID for a new image.
+         */
+        function generateImageId(familyName) {
+            const familyCode = familyName.substring(0, 1);
+            const count = familyData[familyName].images.length;
+            return `${familyCode}_${(count + 1).toString().padStart(3, '0')}`;
+        }
+        
+        /**
+         * UPDATED: Sets the state and display for the currently viewed image.
+         * This function is called by openLightbox, showNextImage, and showPreviousImage.
+         */
+        function updateLightbox(imageObject, imageIndex, familyImagesArray, familyName) {
+            const isProfile = imageObject.isProfile || false;
+
+            // Update global state
+            currentLightboxImage = { 
+                family: familyName, 
+                id: imageObject.id, 
+                uploader: imageObject.uploader, 
+                url: imageObject.url, 
+                isProfile: isProfile 
+            };
+            currentImageIndex = imageIndex;
+            currentFamilyImages = familyImagesArray;
+
+            // Update display
+            lightboxImage.src = imageObject.url;
+
+            if (isProfile) {
+                lightboxUploader.textContent = `Family Profile Image (${adminUser} managed)`;
+            } else {
+                lightboxUploader.textContent = `Image ${imageIndex + 1} of ${currentFamilyImages.length} | ID: ${imageObject.id} (Uploader: ${imageObject.uploader})`;
+            }
+
+            // Permission Check: Can the user delete the image?
+            const canDelete = !isProfile && (imageObject.uploader === currentUser || currentUser === adminUser);
+            if (canDelete) {
+                deleteImageBtn.classList.remove('hidden');
+            } else {
+                deleteImageBtn.classList.add('hidden');
+            }
+
+            // Navigation Button State (Profile image is always index 0)
+            prevImageBtn.disabled = (imageIndex <= 0);
+            nextImageBtn.disabled = (imageIndex >= currentFamilyImages.length - 1);
+        }
+
+        /**
+         * MODIFIED: Opens the image lightbox modal and sets action permissions.
+         */
+        function openLightbox(familyName, imageUrl, imageId, uploader, isProfile = false) {
+            // 1. Compile the full, sorted array of images for this family
+            const familyImages = [];
+            
+            // Add profile image as the first item (Index 0)
+            familyImages.push({
+                url: familyData[familyName].url,
+                uploader: adminUser,
+                id: 'PROFILE',
+                isProfile: true
+            });
+
+            // Add posted images (already sorted in handleViewGallery)
+            familyImages.push(...familyData[familyName].images);
+
+            // 2. Find the index of the clicked image
+            const imageIndex = familyImages.findIndex(img => img.id === imageId);
+            const imageObject = familyImages[imageIndex];
+
+            // 3. Update Lightbox state and display
+            updateLightbox(imageObject, imageIndex, familyImages, familyName);
+
+            // 4. Show the modal
+            lightboxModal.classList.remove('hidden');
+            lightboxModal.classList.add('flex', 'opacity-100');
+        }
+
+        /**
+         * Navigates to the next image in the sequence.
+         */
+        function showNextImage(event) {
+            event.stopPropagation();
+            if (currentImageIndex < currentFamilyImages.length - 1) {
+                const nextIndex = currentImageIndex + 1;
+                const nextImage = currentFamilyImages[nextIndex];
+                updateLightbox(nextImage, nextIndex, currentFamilyImages, currentLightboxImage.family);
+            }
+        }
+
+        /**
+         * Navigates to the previous image in the sequence.
+         */
+        function showPreviousImage(event) {
+            event.stopPropagation();
+            if (currentImageIndex > 0) {
+                const prevIndex = currentImageIndex - 1;
+                const prevImage = currentFamilyImages[prevIndex];
+                updateLightbox(prevImage, prevIndex, currentFamilyImages, currentLightboxImage.family);
+            }
+        }
+
+        /**
+         * Closes the image lightbox modal.
+         */
+        function closeLightbox() {
+            lightboxModal.classList.remove('flex', 'opacity-100');
+            lightboxModal.classList.add('hidden');
+            lightboxImage.src = ''; 
+            
+            // Reset global lightbox state
+            currentLightboxImage = { family: null, id: null, uploader: null, url: null, isProfile: false };
+            currentFamilyImages = [];
+            currentImageIndex = -1;
+        }
+        
+        /**
+         * Deletes the currently viewed image from the family data.
+         */
+        function deleteImage() {
+            const { family, id, uploader, isProfile } = currentLightboxImage;
+            
+            if (isProfile) {
+                showMessageModal('Action Denied', 'The main family profile image cannot be deleted.');
+                return;
+            }
+
+            const canDelete = (uploader === currentUser || currentUser === adminUser);
+            if (!canDelete) {
+                showMessageModal('Action Denied', `You can only delete images you have uploaded (Current User: ${currentUser}).`);
+                return;
+            }
+
+            if (confirm(`Are you sure you want to permanently delete this photo posted by ${uploader}?`)) {
+                
+                // Find the index of the image in the familyData's image list (excluding profile)
+                const indexToDelete = familyData[family].images.findIndex(img => img.id === id);
+
+                if (indexToDelete !== -1) {
+                    familyData[family].images.splice(indexToDelete, 1); 
+                    
+                    // Also remove from the userSaves list if it was saved
+                    if (userSaves[currentUser] && userSaves[currentUser].includes(id)) {
+                        const savedIndex = userSaves[currentUser].indexOf(id);
+                        userSaves[currentUser].splice(savedIndex, 1);
+                    }
+                    
+                    closeLightbox();
+                    showMessageModal('Photo Deleted', `The image has been successfully removed from the ${family} gallery.`);
+                    
+                    // Re-render the gallery view
+                    handleViewGallery(family);
+                } else {
+                    showMessageModal('Error', 'Image not found in the family archive.');
+                }
+            }
+        }
+
+        /**
+         * Triggers a download of the currently viewed image and tracks the save.
+         */
+        function saveImage() {
+            const { url, family, id } = currentLightboxImage;
+
+            // Only allow saving if it's not the profile image
+            if (currentLightboxImage.isProfile) {
+                 showMessageModal('Saving Denied', 'The main family profile image cannot be manually saved or deleted.');
+                 return;
+            }
+            
+            // --- Save Tracking Logic ---
+            if (!userSaves[currentUser]) {
+                userSaves[currentUser] = [];
+            }
+
+            if (!userSaves[currentUser].includes(id)) {
+                userSaves[currentUser].push(id);
+                showMessageModal('Download Started & Saved', `The photo was saved to your "My Saved Images" list and the download has begun.`);
+            } else {
+                 showMessageModal('Download Started', `The photo is already in your saved list. Download starting now.`);
+            }
+            // ---------------------------------
+            
+            // Trigger Download
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `${family}_Photo_Mugoodafamily_${new Date().getTime()}.png`; 
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            closeLightbox();
+        }
+
+        /**
+         * Opens the photo upload modal for a specific family.
+         */
+        function openUploadModal(familyName) {
+            familyNameDisplay.textContent = familyName;
+            familyIdInput.value = familyName;
+            uploadModal.classList.remove('hidden');
+            uploadModal.classList.add('flex', 'opacity-100');
+            setTimeout(() => {
+                uploadModalContent.classList.remove('scale-95', 'opacity-0');
+                uploadModalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        /**
+         * Closes the photo upload modal.
+         */
+        function closeUploadModal() {
+            uploadModalContent.classList.remove('scale-100', 'opacity-100');
+            uploadModalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                uploadModal.classList.remove('flex', 'opacity-100');
+                uploadModal.classList.add('hidden');
+                document.getElementById('image-upload').value = ''; 
+            }, 300);
+        }
+
+        /**
+         * Handles the simulated photo upload form submission.
+         */
+        function handleUpload(familyName) {
+            const fileInput = document.getElementById('image-upload');
+            const file = fileInput.files[0];
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const newImageURL = e.target.result;
+                    const newId = generateImageId(familyName); // Get the new ID early
+                    
+                    // 1. Store the image data with metadata
+                    const newImage = {
+                        url: newImageURL,
+                        uploader: currentUser, 
+                        id: newId
+                    };
+
+                    familyData[familyName].images.push(newImage);
+                    
+                    // --- Automatically Save the Image on Upload ---
+                    if (!userSaves[currentUser]) {
+                        userSaves[currentUser] = [];
+                    }
+                    userSaves[currentUser].push(newId); // Save the image ID to the user's list
+                    // --------------------------------------------------
+                    
+                    closeUploadModal();
+                    
+                    showMessageModal('Upload Successful & Saved', `A new picture has been added and **automatically saved** to your list!`);
+                    
+                    // 2. Immediately show the updated gallery view
+                    handleViewGallery(familyName); 
+                };
+                reader.readAsDataURL(file);
+
+            } else {
+                closeUploadModal();
+                showMessageModal('Upload Failed', 'Please select a file to upload.', 'error');
+            }
+        }
+
+        /**
+         * Renders the simulated gallery view for a specific family.
+         */
+        function handleViewGallery(familyName) {
+            const data = familyData[familyName];
+
+            galleryHeader.textContent = `Gallery for ${familyName}`;
+            
+            // Update the "Post a New Picture" button's action for the current family
+            galleryPostButton.setAttribute('onclick', `openUploadModal('${familyName}')`);
+
+            familyImagesContainer.innerHTML = ''; // Clear existing images
+            
+            // Get the total number of items (Profile Image + Posted Images)
+            const totalItems = data.images.length + 1;
+
+            // 1. Add the main profile image (NOW OPENS LIGHTBOX)
+            familyImagesContainer.innerHTML += `
+                <div class="bg-marine-blue/10 rounded-lg shadow-inner overflow-hidden border border-marine-blue/30 cursor-pointer group" 
+                    onclick="openLightbox('${familyName}', '${data.url}', 'PROFILE', '${adminUser}', true)">
+                    <img src="${data.url}" alt="${familyName} Profile Picture" class="w-full h-64 object-cover transition duration-300 group-hover:opacity-80">
+                    <div class="p-4">
+                        <p class="text-sm font-bold text-marine-blue">Family Profile Image (Click to view)</p>
+                    </div>
+                </div>
+            `;
+            
+            // 2. Add the dynamically posted images (ALSO OPENS LIGHTBOX)
+            if (data.images.length > 0) {
+                document.getElementById('gallery-status').textContent = `${totalItems} image(s) currently viewable.`;
+                
+                // Sort images by ID (simulates posting order)
+                data.images.sort((a, b) => a.id.localeCompare(b.id));
+
+                data.images.forEach((image, index) => {
+                    familyImagesContainer.innerHTML += `
+                        <div class="bg-card-photos rounded-lg shadow-xl overflow-hidden border-t-4 border-coral-accent/50 cursor-pointer group" 
+                            onclick="openLightbox('${familyName}', '${image.url}', '${image.id}', '${image.uploader}', false)">
+                            <img src="${image.url}" alt="${familyName} Posted Image ${index + 1}" class="w-full h-64 object-cover transition duration-300 group-hover:scale-[1.02] group-hover:opacity-80">
+                            <div class="p-4">
+                                <p class="text-base font-semibold text-slate-800">Post ${image.id}</p>
+                                <p class="text-sm text-coral-accent">Click to view details</p>
+                            </div>
+                        </div>
+                    `;
+                });
+            } else {
+                document.getElementById('gallery-status').textContent = `Viewing Initial Image. Post the first picture!`;
+                // Add a placeholder message when only the profile image is present
+                familyImagesContainer.innerHTML += `
+                    <div class="col-span-1 md:col-span-2 p-6 bg-marine-blue/5 rounded-lg flex items-center justify-center border-2 border-dashed border-marine-blue/30 text-marine-blue/80">
+                        <p class="text-xl text-center">No other family photos have been posted yet. Click **Post a New Picture** above to add one!</p>
+                    </div>
+                `;
+            }
+
+            showPage('family-gallery-view');
+        }
+
+        // --- START Saved Images Functions ---
+
+        /**
+         * Renders the list of images saved by the currentUser.
+         */
+        function renderSavedImages() {
+            if (!savedImagesContainer) return;
+            
+            savedImagesContainer.innerHTML = '';
+            const savedIds = userSaves[currentUser] || [];
+            
+            if (savedIds.length === 0) {
+                savedImagesContainer.innerHTML = `
+                    <div class="md:col-span-4 p-8 bg-marine-blue/5 rounded-xl shadow-inner border-2 border-dashed border-marine-blue/30 text-marine-blue/80 text-center">
+                        <p class="text-xl">You have not saved any photos yet.</p>
+                        <p class="text-sm mt-2">Go to the **Family Photos** section and click 'Save' in the lightbox!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // 1. Compile a list of all images (including which family they belong to)
+            const allImages = [];
+            Object.keys(familyData).forEach(familyName => {
+                // Exclude the main profile image, as it shouldn't be 'saved' in this way
+                familyData[familyName].images.forEach(image => {
+                    allImages.push({
+                        ...image,
+                        familyName: familyName // Add family name for context
+                    });
+                });
+            });
+
+            // 2. Filter the master list to only include images saved by the current user
+            const savedImageList = allImages.filter(image => savedIds.includes(image.id));
+
+            // 3. Render the saved images
+            savedImageList.forEach(image => {
+                savedImagesContainer.innerHTML += `
+                    <div class="bg-card-photos rounded-lg shadow-xl overflow-hidden border-t-4 border-marine-blue cursor-pointer group" 
+                        onclick="openLightbox('${image.familyName}', '${image.url}', '${image.id}', '${image.uploader}', false)">
+                        <img src="${image.url}" alt="Saved Photo ${image.id}" class="w-full h-64 object-cover transition duration-300 group-hover:scale-[1.02] group-hover:opacity-80">
+                        <div class="p-4">
+                            <p class="text-base font-semibold text-marine-blue">Saved Post ${image.id}</p>
+                            <p class="text-sm text-coral-accent">From: ${image.familyName} (Click to view details)</p>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // --- END Saved Images Functions ---
+
+        // --- START Video Functions (NEW SECTION) ---
+
+        /**
+         * Renders the video gallery page.
+         */
+        function renderVideosPage() {
+            const container = document.getElementById('videos-container');
+            if (!container) return;
+
+            // Clear the container
+            container.innerHTML = '';
+
+            // Get all video keys and sort them newest first (simulated by ID)
+            const sortedVideoIds = Object.keys(familyVideos).sort().reverse(); 
+
+            if (sortedVideoIds.length === 0) {
+                 container.innerHTML = `
+                    <div class="sm:col-span-2 p-8 bg-marine-blue/5 rounded-xl flex items-center justify-center border-2 border-dashed border-marine-blue/30 text-marine-blue/80">
+                        <p class="text-xl text-center">No videos have been archived yet. Share a link!</p>
+                    </div>
+                 `;
+                 return;
+            }
+
+            sortedVideoIds.forEach(videoId => {
+                const video = familyVideos[videoId];
+                
+                // Determine thumbnail URL (simplified/simulated for now)
+                let thumbnailUrl = 'https://via.placeholder.com/320x180.png?text=Family+Video';
+                if (video.url.includes('youtube.com') || video.url.includes('youtu.be')) {
+                    // Basic YouTube ID extraction for a placeholder thumbnail
+                    const youtubeIdMatch = video.url.match(/(?:youtu\.be\/|v=)([^&]+)/);
+                    if (youtubeIdMatch) {
+                        thumbnailUrl = `https://img.youtube.com/vi/${youtubeIdMatch[1]}/hqdefault.jpg`;
+                    }
+                }
+                
+                container.innerHTML += `
+                    <div class="bg-card-photos rounded-xl shadow-lg overflow-hidden border-t-4 border-coral-accent/70 transition duration-300 hover:shadow-xl cursor-pointer" onclick="openVideoModal('${videoId}')">
+                        <div class="relative w-full h-48 bg-black">
+                            <img src="${thumbnailUrl}" alt="${video.title} Thumbnail" class="w-full h-full object-cover opacity-70 transition duration-300 group-hover:opacity-100">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <svg class="w-16 h-16 text-white bg-black/50 p-2 rounded-full hover:bg-black/80 transition" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-xl font-bold text-slate-800 mb-1">${video.title}</h3>
+                            <p class="text-sm text-coral-accent">By: ${video.uploader}</p>
+                            <p class="text-xs text-slate-500 mt-1">${video.comments.length} Comment(s) | ${video.date}</p>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+        
+        /**
+         * Simulates video submission by adding to the familyVideos data structure.
+         */
+        function handleVideoSubmission(form) {
+            const title = form.elements['video-title'].value;
+            const url = form.elements['video-url'].value;
+            const uploader = form.elements['video-uploader-name'].value;
+            
+            if (!title || !url || !uploader) {
+                showMessageModal('Error', 'Please fill out all video submission fields.');
+                return;
+            }
+
+            // Simple ID generation for the new video
+            const newId = 'V_' + (Object.keys(familyVideos).length + 1).toString().padStart(3, '0');
+            
+            // Add to the global data structure
+            familyVideos[newId] = {
+                title: title,
+                url: url,
+                uploader: uploader,
+                date: new Date().toISOString().substring(0, 10),
+                comments: []
+            };
+
+            form.reset();
+            form.elements['video-uploader-name'].value = currentUser; // Reset to default user
+            
+            showMessageModal('Video Submitted!', `Your video **"${title}"** has been added to the archive.`);
+            renderVideosPage(); // Re-render the list
+        }
+
+        /**
+         * Opens the modal to view a video, play it, and show/add comments.
+         */
+        function openVideoModal(videoId) {
+            const video = familyVideos[videoId];
+            if (!video) return;
+
+            // 1. Set data for the comment form
+            modalVideoIdInput.value = videoId;
+            
+            // 2. Set title and info
+            videoTitleDisplay.textContent = video.title;
+            videoInfoDisplay.textContent = `Uploader: ${video.uploader} | Date: ${video.date}`;
+
+            // 3. Create the iframe player (simplified embed based on URL host)
+            let iframeSrc = video.url;
+            if (video.url.includes('youtube.com/watch') && video.url.includes('v=')) {
+                // Convert full YT watch URL to embed URL
+                const videoIdMatch = video.url.match(/(?:v=)([^&]+)/);
+                if (videoIdMatch) {
+                    iframeSrc = `https://www.youtube.com/embed/${videoIdMatch[1]}?autoplay=1&rel=0`;
+                }
+            } else if (video.url.includes('youtu.be/')) {
+                 // Convert short YT URL to embed URL
+                const videoIdMatch = video.url.match(/(?:youtu\.be\/)([^&]+)/);
+                if (videoIdMatch) {
+                    iframeSrc = `https://www.youtube.com/embed/${videoIdMatch[1]}?autoplay=1&rel=0`;
+                }
+            } else if (video.url.includes('vimeo.com')) {
+                // For Vimeo, assume user provided a player URL
+                iframeSrc = video.url + (video.url.includes('?') ? '&' : '?') + 'autoplay=1';
+            }
+
+            videoPlayerContainer.innerHTML = `
+                 <iframe src="${iframeSrc}" 
+                         frameborder="0" 
+                         allow="autoplay; fullscreen; picture-in-picture" 
+                         allowfullscreen 
+                         class="w-full h-full rounded-lg shadow-xl">
+                 </iframe>
+            `;
+
+            // 4. Render comments
+            renderVideoComments(videoId);
+
+            // 5. Show the modal
+            videoModal.classList.remove('hidden');
+            videoModal.classList.add('flex', 'opacity-100');
+            setTimeout(() => {
+                videoModalContent.classList.remove('scale-95', 'opacity-0');
+                videoModalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        /**
+         * Closes the video modal and stops the video playback.
+         */
+        function closeVideoModal() {
+            // Stop video playback by clearing the iframe content
+            videoPlayerContainer.innerHTML = '';
+            
+            videoModalContent.classList.remove('scale-100', 'opacity-100');
+            videoModalContent.classList.add('scale-95', 'opacity-0');
+
+            setTimeout(() => {
+                videoModal.classList.remove('flex', 'opacity-100');
+                videoModal.classList.add('hidden');
+            }, 300);
+        }
+
+        /**
+         * Renders the comments for a specific video in the modal.
+         */
+        function renderVideoComments(videoId) {
+            const video = familyVideos[videoId];
+            if (!video || !videoCommentsContainer) return;
+
+            videoCommentsContainer.innerHTML = '';
+            commentCountDisplay.textContent = video.comments.length;
+
+            if (video.comments.length === 0) {
+                 videoCommentsContainer.innerHTML = '<p class="text-slate-500 italic">No comments yet. Be the first!</p>';
+                 return;
+            }
+
+            // Render comments newest first
+            video.comments.slice().reverse().forEach(comment => {
+                videoCommentsContainer.innerHTML += `
+                    <div class="p-3 bg-gray-50 rounded-lg border-l-4 border-marine-blue/50">
+                        <p class="font-semibold text-sm text-marine-blue">${comment.name}</p>
+                        <p class="text-slate-700 text-sm mt-1">${comment.text}</p>
+                        <p class="text-xs text-slate-500 mt-1 italic">${comment.time}</p>
+                    </div>
+                `;
+            });
+            
+            // Scroll to the bottom to see the newest comment (in real world)
+            setTimeout(() => {
+                videoCommentsContainer.scrollTop = videoCommentsContainer.scrollHeight;
+            }, 50);
+        }
+
+        /**
+         * Handles the comment submission for the currently open video.
+         */
+        function handleVideoComment(form) {
+            const videoId = form.elements['modal-video-id'].value;
+            const commentText = form.elements['comment-text'].value;
+            
+            if (!commentText || !videoId || !familyVideos[videoId]) {
+                showMessageModal('Error', 'Comment submission failed.');
+                return;
+            }
+
+            const newComment = {
+                name: currentUser,
+                text: commentText,
+                time: 'Just now'
+            };
+
+            familyVideos[videoId].comments.push(newComment);
+            form.elements['comment-text'].value = ''; // Clear textarea
+
+            renderVideoComments(videoId); // Re-render comments instantly
+        }
+
+        // --- END Video Functions ---
+        
+        // --- START Calendar Specific Data and Functions ---
+        
+        /**
+         * Finds events for a specific month and year, handling recurring events.
+         */
+        function getEventsForMonth(targetMonth, targetYear) {
+            const currentEvents = [...familyEvents]; // Start with fixed events
+            
+            // Add dynamically submitted events
+            recentCalendarSubmissions.forEach(event => {
+                const eventDate = new Date(event.date);
+                if (eventDate.getMonth() === targetMonth && eventDate.getFullYear() === targetYear) {
+                    currentEvents.push({
+                        date: `${eventDate.getMonth() + 1}-${eventDate.getDate().toString().padStart(2, '0')}`,
+                        name: event.name,
+                        type: 'Submission'
+                    });
+                }
+            });
+
+            return currentEvents;
+        }
+
+        /**
+         * Renders the calendar grid and the event list for the current month.
+         */
+        function renderCalendar() {
+            const today = new Date();
+            const year = currentCalendarDate.getFullYear();
+            const month = currentCalendarDate.getMonth();
+            
+            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            
+            document.getElementById('current-month-year').textContent = `${monthNames[month]} ${year}`;
+            
+            const firstDayOfMonth = new Date(year, month, 1).getDay(); // 0 (Sun) to 6 (Sat)
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            
+            const grid = document.getElementById('calendar-grid');
+            grid.innerHTML = '';
+            
+            // 1. Get events for the current month/year
+            const events = getEventsForMonth(month, year);
+            const eventsByDay = {};
+            events.forEach(event => {
+                const [, day] = event.date.split('-').map(Number);
+                if (event.type === 'Submission') { // Handle dynamic submissions with full date
+                    const eventDate = new Date(event.date);
+                    const eventDay = eventDate.getDate();
+                    if (!eventsByDay[eventDay]) eventsByDay[eventDay] = [];
+                    eventsByDay[eventDay].push(event);
+                } else if (event.date.startsWith(`${month + 1}-`)) { // Handle fixed recurring events
+                    if (!eventsByDay[day]) eventsByDay[day] = [];
+                    eventsByDay[day].push(event);
+                }
+            });
+
+            // 2. Render placeholders for preceding month's days
+            for (let i = 0; i < firstDayOfMonth; i++) {
+                grid.innerHTML += `<div class="p-3 text-center text-slate-400 bg-gray-100 rounded-lg"></div>`;
+            }
+            
+            // 3. Render current month's days
+            for (let day = 1; day <= daysInMonth; day++) {
+                const isToday = day === today.getDate() && month === today.getMonth() && year === today.getFullYear();
+                const hasEvent = eventsByDay[day] && eventsByDay[day].length > 0;
+                
+                let dayClasses = `p-3 text-center rounded-xl font-bold transition duration-150 relative cursor-pointer`;
+                
+                if (isToday) {
+                    dayClasses += ' bg-coral-accent text-white shadow-lg ring-2 ring-offset-2 ring-coral-accent/50';
+                } else if (hasEvent) {
+                    dayClasses += ' bg-marine-blue/20 text-marine-blue hover:bg-marine-blue/30';
+                } else {
+                    dayClasses += ' bg-card-photos text-slate-700 hover:bg-gray-100';
+                }
+
+                grid.innerHTML += `
+                    <div class="${dayClasses}">
+                        ${day}
+                        ${hasEvent ? `<span class="absolute top-1 right-1 h-2 w-2 bg-red-500 rounded-full"></span>` : ''}
+                    </div>
+                `;
+            }
+            
+            // 4. Render the Event List
+            const eventList = document.getElementById('event-list');
+            const noEventsMessage = document.getElementById('no-events-message');
+            eventList.innerHTML = '';
+
+            let hasEvents = false;
+            for (let day = 1; day <= daysInMonth; day++) {
+                if (eventsByDay[day]) {
+                    eventsByDay[day].forEach(event => {
+                        const eventDate = new Date(year, month, day);
+                        const dayString = eventDate.toLocaleDateString('en-US', { weekday: 'short', day: 'numeric' });
+                        const typeColor = event.type === 'Birthday' ? 'border-pink-500' : 
+                                          event.type === 'Meeting' ? 'border-marine-blue' :
+                                          event.type === 'Submission' ? 'border-coral-accent' : 'border-red-500';
+                        
+                        eventList.innerHTML += `
+                            <li class="flex items-start space-x-3 p-3 bg-white rounded-lg shadow-md border-l-4 ${typeColor}">
+                                <span class="flex-shrink-0 mt-1 h-2 w-2 ${typeColor.replace('border-', 'bg-')} rounded-full"></span>
+                                <div>
+                                    <p class="font-semibold text-slate-800">${event.name}</p>
+                                    <p class="text-sm text-slate-500">${dayString} (${event.type})</p>
+                                </div>
+                            </li>
+                        `;
+                        hasEvents = true;
+                    });
+                }
+            }
+
+            if (!hasEvents) {
+                noEventsMessage.classList.remove('hidden');
+            } else {
+                noEventsMessage.classList.add('hidden');
+            }
+        }
+
+        /**
+         * Changes the calendar month.
+         */
+        function changeMonth(delta) {
+            currentCalendarDate.setMonth(currentCalendarDate.getMonth() + delta);
+            renderCalendar();
+        }
+        
+        /**
+         * Handles calendar event form submission (simulated instant post).
+         */
+        function handleCalendarSubmission(form) {
+            const name = form.elements['event-name'].value;
+            const date = form.elements['event-date'].value; // YYYY-MM-DD format
+            const description = form.elements['event-description'].value;
+            
+            // Basic validation
+            if (!name || !date) {
+                showMessageModal('Error', 'Please provide an event name and date.');
+                return;
+            }
+
+            const eventDate = new Date(date + 'T00:00:00'); // Ensure UTC neutrality for date consistency
+            
+            if (isNaN(eventDate)) {
+                showMessageModal('Error', 'Invalid date format.');
+                return;
+            }
+
+            const newEvent = {
+                name: name,
+                date: eventDate.toISOString().substring(0, 10), // Store as YYYY-MM-DD
+                description: description,
+                submitted: new Date().toLocaleTimeString()
+            };
+
+            recentCalendarSubmissions.unshift(newEvent); // Add to the start
+            form.reset();
+            
+            showMessageModal('Event Submitted', `**${name}** has been submitted for review and instantly added to your view.`);
+
+            // Re-render the calendar and recent submissions list
+            renderCalendar();
+            renderRecentCalendarSubmissions();
+        }
+
+        /**
+         * Renders the list of recently submitted calendar events.
+         */
+        function renderRecentCalendarSubmissions() {
+             const container = document.getElementById('recent-calendar-submissions');
+             if (!container) return;
+
+             if (recentCalendarSubmissions.length === 0) {
+                 container.innerHTML = '<p class="text-slate-500 italic">No events submitted in this session.</p>';
+                 return;
+             }
+             
+             container.innerHTML = recentCalendarSubmissions.slice(0, 5).map(event => `
+                 <div class="border-l-4 border-coral-accent/70 pl-3 py-1 bg-gray-50 rounded-md">
+                    <p class="font-semibold text-sm text-slate-800">${event.name}</p>
+                    <p class="text-xs text-slate-500">Date: ${new Date(event.date).toDateString()} (at ${event.submitted})</p>
+                 </div>
+             `).join('');
+        }
+        
+        // --- END Calendar Specific Data and Functions ---
+        
+        // --- START Announcement Specific Functions ---
+
+        /**
+         * Handles announcement form submission (simulated instant post).
+         */
+        function handleAnnouncementSubmission(form) {
+            const title = form.elements['announcement-title'].value;
+            const details = form.elements['announcement-details'].value;
+            
+            // Basic validation
+            if (!title || !details) {
+                showMessageModal('Error', 'Please provide a title and details for the announcement.');
+                return;
+            }
+
+            const newAnnouncement = {
+                title: title,
+                details: details,
+                submitted: new Date().toLocaleString()
+            };
+
+            recentAnnouncementSubmissions.unshift(newAnnouncement); // Add to the start
+            form.reset();
+            
+            showMessageModal('Announcement Posted', `Your announcement **${title}** has been posted instantly.`);
+
+            renderRecentAnnouncementSubmissions();
+        }
+        
+        /**
+         * Renders the list of recently submitted announcements.
+         */
+        function renderRecentAnnouncementSubmissions() {
+             const container = document.getElementById('recent-announcement-submissions');
+             if (!container) return;
+
+             if (recentAnnouncementSubmissions.length === 0) {
+                 container.innerHTML = '<p class="text-lg text-slate-500 italic p-4 bg-card-photos rounded-xl shadow">No announcements have been posted yet. Be the first!</p>';
+                 return;
+             }
+             
+             container.innerHTML = recentAnnouncementSubmissions.slice(0, 5).map(announcement => `
+                 <div class="bg-card-photos p-4 rounded-xl shadow-lg border-l-4 border-marine-blue">
+                    <h4 class="text-xl font-bold text-slate-800 mb-2">${announcement.title}</h4>
+                    <p class="text-slate-600 mb-3">${announcement.details}</p>
+                    <p class="text-xs text-slate-500 italic">Posted on ${announcement.submitted}</p>
+                 </div>
+             `).join('');
+        }
+        
+        // --- END Announcement Specific Functions ---
+
+        // --- START Future Generations Functions ---
+        
+        /**
+         * Handles the registration form submission for young family members.
+         */
+        function handleMugoodaRegistration() {
+            const firstName = document.getElementById('first-name').value;
+            const familyName = document.getElementById('family-name').value;
+            
+            if (firstName && familyName) {
+                const fullName = `${firstName} ${familyName}`;
+                if (!registeredYouth.includes(fullName)) {
+                    registeredYouth.push(fullName);
+                    document.getElementById('young-mugooda-registration-form').reset();
+                    showMessageModal('Registration Successful!', `**${fullName}** is now a registered young Mugooda!`);
+                    renderRegisteredYouthList(); // Update the list instantly
+                } else {
+                    showMessageModal('Already Registered', `**${fullName}** is already on the list.`);
+                }
+            } else {
+                 showMessageModal('Error', 'Please enter both first and family name.');
+            }
+        }
+        
+        /**
+         * Renders the list of registered youth.
+         */
+        function renderRegisteredYouthList() {
+             if (!registeredYouthContainer) return;
+
+             if (registeredYouth.length === 0) {
+                 registeredYouthContainer.innerHTML = '<p class="text-slate-500 italic">No youth have registered yet.</p>';
+                 return;
+             }
+             
+             const listItems = registeredYouth.map(name => `
+                 <li class="bg-card-photos p-3 rounded-lg shadow flex justify-between items-center border-l-4 border-amber-500">
+                    <span class="text-lg font-medium text-slate-700">${name}</span>
+                    <span class="text-xs text-coral-accent font-bold">Registered</span>
+                 </li>
+             `).join('');
+             
+             registeredYouthContainer.innerHTML = `<ul class="space-y-3">${listItems}</ul>`;
+        }
+        
+        /**
+         * Handles the content submission form. (Simulated pending review)
+         */
+        function handleSubmitContent() {
+            const name = document.getElementById('submit-name').value;
+            const title = document.getElementById('content-title').value;
+            const text = document.getElementById('content-text').value;
+            
+            if (name && title && text) {
+                const newContent = {
+                    author: name,
+                    title: title,
+                    text: text,
+                    submitted: new Date().toLocaleDateString()
+                };
+                
+                recentSubmissions.unshift(newContent); // Add to pending list
+                document.getElementById('content-submission').reset();
+                showMessageModal('Content Submitted!', `Your content **"${title}"** has been submitted for review. Thank you!`);
+                renderRecentSubmissions();
+            } else {
+                showMessageModal('Error', 'Please fill out all fields for your content submission.');
+            }
+        }
+
+        /**
+         * Renders the simulated list of recent content submissions (pending review).
+         */
+        function renderRecentSubmissions() {
+             const container = document.getElementById('recent-submissions-container');
+             if (!container) return;
+
+             if (recentSubmissions.length === 0) {
+                 container.innerHTML = '<p class="text-slate-500 italic p-4 bg-card-photos rounded-xl shadow">No content submitted recently.</p>';
+                 return;
+             }
+             
+             container.innerHTML = recentSubmissions.slice(0, 3).map(content => `
+                 <div class="bg-card-photos p-4 rounded-xl shadow border-l-4 border-coral-accent/70">
+                    <h4 class="text-xl font-bold text-slate-800">${content.title}</h4>
+                    <p class="text-sm text-slate-600 truncate">${content.text}</p>
+                    <p class="text-xs text-coral-accent font-medium mt-2">By: ${content.author} (Submitted ${content.submitted})</p>
+                 </div>
+             `).join('');
+        }
+
+        /**
+         * Renders the simulated content archive.
+         */
+        function renderContentArchive() {
+            if (!contentArchiveContainer) return;
+            
+            // For simulation, we can push a sample published item if none exist
+            if (youthContentArchive.length === 0) {
+                youthContentArchive.push({
+                    author: 'Sample Youth',
+                    title: 'The Future of Our Family',
+                    text: 'A poem about unity: "The roots run deep, the branches wide, a digital tree where we reside..."',
+                    published: '2025-10-01'
+                });
+            }
+
+            const content = youthContentArchive.map(item => `
+                <div class="bg-card-photos p-6 rounded-xl shadow-lg border border-coral-accent/20">
+                    <h3 class="text-2xl font-bold text-coral-accent mb-2">${item.title}</h3>
+                    <p class="text-sm text-slate-500 mb-4">By **${item.author}** | Published: ${item.published}</p>
+                    <blockquote class="border-l-4 border-amber-500/50 pl-4 italic text-slate-600">
+                        ${item.text}
+                    </blockquote>
+                </div>
+            `).join('');
+
+            contentArchiveContainer.innerHTML = content;
+        }
+
+        // --- END Future Generations Functions ---
+
+
+        // --- Initialization ---
+
+        /**
+         * Runs when the page loads.
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+            handleLoadAndHashChange();
+            window.addEventListener('hashchange', handleLoadAndHashChange);
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Set the current year in the footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            
+            // Listen for keydown events to allow keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (lightboxModal.classList.contains('flex')) {
+                    if (e.key === 'ArrowRight') {
+                        showNextImage(e);
+                    } else if (e.key === 'ArrowLeft') {
+                        showPreviousImage(e);
+                    } else if (e.key === 'Escape') {
+                        closeLightbox();
+                    }
+                } else if (videoModal.classList.contains('flex') && e.key === 'Escape') {
+                     closeVideoModal();
+                }
+            });
+
+            // Render all initial content that is not page-triggered
+            renderFamilyCards();
+            renderVideosPage(); // NEW: Initial render of videos
+            renderRegisteredYouthList();
+            renderContentArchive();
+            renderCalendar();
+            renderRecentSubmissions();
+            renderRecentCalendarSubmissions();
+            renderRecentAnnouncementSubmissions();
+            renderSavedImages(); 
+        });
+    </script>
+</body>
+</html>
